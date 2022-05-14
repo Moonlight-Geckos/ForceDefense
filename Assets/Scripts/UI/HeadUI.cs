@@ -26,7 +26,16 @@ public class HeadUI : MonoBehaviour
 
     private void finishGame()
     {
-        ControlPanel.gameObject.SetActive(false);
-        endGamePanel.alpha = 1.0f;
+        IEnumerator activate()
+        {
+            yield return new WaitForSeconds(2);
+            ControlPanel.gameObject.SetActive(false);
+            while (endGamePanel.alpha < 1)
+            {
+                endGamePanel.alpha += Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+        }
+        StartCoroutine(activate());
     }
 }

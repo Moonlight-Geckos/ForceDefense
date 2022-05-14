@@ -177,16 +177,15 @@ public class Shield : MonoBehaviour, IHittable
     {
         foreach (Material mat in materials)
         {
-            mat.SetColor("_Color", color);
+            mat.color = color;
         }
     }
     private void ResetColors()
     {
         for (int i = 0; i < materials.Length; i++)
         {
-            materials[i].SetColor("_Color", originalColors[i]);
+            materials[i].color = originalColors[i];
         }
     }
-
     #endregion
 }

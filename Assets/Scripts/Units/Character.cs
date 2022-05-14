@@ -84,18 +84,19 @@ public class Character : MonoBehaviour, IHittable
         }
     }
 
-    public void ChangeColor(Color color)
+    private void ChangeColor(Color color)
     {
         foreach (Material mat in materials)
         {
-            mat.SetColor("_Color", color);
+            mat.color = color;
         }
     }
-    public void ResetColors()
+    private void ResetColors()
     {
         for (int i = 0; i < materials.Length; i++)
         {
-            materials[i].SetColor("_Color", originalColors[i]);
+
+            materials[i].color = originalColors[i];
         }
     }
     public void Destroy()
