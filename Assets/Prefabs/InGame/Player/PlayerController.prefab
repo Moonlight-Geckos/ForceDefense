@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d18069cd4c6fc4b95495a44a53d5e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveVerticalSpeed: 6
+  passiveVerticalSpeed: 4
   additiveVerticalSpeed: 4
   horizontalSpeed: 7
   rotationSpeed: 7

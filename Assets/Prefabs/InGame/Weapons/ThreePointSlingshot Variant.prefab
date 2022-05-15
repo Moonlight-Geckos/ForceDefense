@@ -281,9 +281,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePool: {fileID: 11400000, guid: f88afb4fd29b0784e81f69b8c82424cb, type: 2}
-  projectileSpeed: 20
-  Cooldown: 1.2
-  radiusOfAttack: 60
+  projectileSpeed: 15
+  Cooldown: 1.7
+  radiusOfAttack: 30
 --- !u!4 &1026221065242998426 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: de2e5500cede00a46b3fe461c7be80a4, type: 3}
