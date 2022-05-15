@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d066197e9738541834787fc016eadd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 3
   particlePool: {fileID: 11400000, guid: 0a00d583206c6dd41b7bd81598d9cdc9, type: 2}
   projectileType: 0
 --- !u!54 &-252868420819322499
