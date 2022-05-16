@@ -252,11 +252,11 @@ PrefabInstance:
     - target: {fileID: -6609001934792292544, guid: de2e5500cede00a46b3fe461c7be80a4, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: 0e36849a34ee044428d25f72f3d62190, type: 2}
+      objectReference: {fileID: 2100000, guid: 4e41748b945f3b74cb320d68426ac95f, type: 2}
     - target: {fileID: -6609001934792292544, guid: de2e5500cede00a46b3fe461c7be80a4, type: 3}
       propertyPath: m_Materials.Array.data[3]
       value: 
-      objectReference: {fileID: 2100000, guid: 0e36849a34ee044428d25f72f3d62190, type: 2}
+      objectReference: {fileID: 2100000, guid: 4e41748b945f3b74cb320d68426ac95f, type: 2}
     - target: {fileID: 919132149155446097, guid: de2e5500cede00a46b3fe461c7be80a4, type: 3}
       propertyPath: m_Name
       value: ThreePointSlingshot Variant

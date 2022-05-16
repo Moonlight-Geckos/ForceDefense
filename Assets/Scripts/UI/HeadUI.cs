@@ -19,9 +19,11 @@ public class HeadUI : MonoBehaviour
         IEnumerator restart()
         {
             yield return new WaitForEndOfFrame();
+            Time.timeScale = 1.0f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         StartCoroutine(restart());
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
     }
 
     private void finishGame()
@@ -35,6 +37,7 @@ public class HeadUI : MonoBehaviour
                 endGamePanel.alpha += Time.deltaTime;
                 yield return new WaitForEndOfFrame();
             }
+            Time.timeScale = 0f;
         }
         StartCoroutine(activate());
     }

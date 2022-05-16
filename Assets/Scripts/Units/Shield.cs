@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public enum ShieldPositioning
@@ -14,35 +15,56 @@ public class Shield : MonoBehaviour, IHittable
     [SerializeField]
     private float maxHealth = 4;
 
-    [SerializeField]
-    private Color hitColor = Color.red;
-
-    [SerializeField]
-    private Color reflectionColor = Color.blue;
-
     [Range(0.10f, 0.90f)]
     [SerializeField]
     private float shrinkBy = 0.30f;
 
-    [Range(0.10f, 1f)]
+    [Header("Hittable")]
+
+    [Range(0.10f, 0.90f)]
     [SerializeField]
-    private float animationLength = 0.2f;
+    private float hitAnimationLength = 0.30f;
+
+    [Range(0.0f, 6f)]
+    [SerializeField]
+    private float hitDuration = 2f;
+
+    [SerializeField]
+    private Color hitColor;
+
+    [Space(20)]
+
+    [Header("Reflection")]
+
+    [Range(0.10f, 0.90f)]
+    [SerializeField]
+    private float reflectAnimationLength = 0.30f;
+
+    [Range(0.0f, 6f)]
+    [SerializeField]
+    private float reflectionDuration = 2f;
+
+    [SerializeField]
+    private Color reflectionColor;
+
+    [Space(20)]
 
     [SerializeField]
     private ParticlePool shieldExplosionParticlePool;
+
+    [SerializeField]
+    private HitglowEffect shieldGlowEffect;
+
 
     #endregion
 
     #region Private
 
     private float health;
-    private Material[] materials;
-    private Color[] originalColors;
     bool isReflecting = false;
     private Vector3 defaultScale = Vector3.one;
     private ShieldPositioning positioning;
     private Timer shieldReflectionTimer;
-    private Timer shieldHitTimer;
 
     #endregion
 
@@ -76,18 +98,13 @@ public class Shield : MonoBehaviour, IHittable
             positioning = ShieldPositioning.Left;
         else if(transform.localPosition.x > 0)
             positioning = ShieldPositioning.Right;
-        materials = GetComponent<MeshRenderer>().materials;
-        originalColors = new Color[materials.Length];
-        for (int i = 0; i < materials.Length; i++)
-        {
-            originalColors[i] = materials[i].color;
-        }
-        defaultScale = transform.localScale;
+        defaultScale = transform.localScale; 
         health = maxHealth;
     }
     public void GetHit(Projectile projectile)
     {
-        if(health == 0) return;
+        if(health <= 0) return;
+
         if (IsReflecting)
         {
             projectile.Reflect(transform.forward);
@@ -95,32 +112,14 @@ public class Shield : MonoBehaviour, IHittable
         else
         {
             health -= projectile.Damage;
-            if (health == 0)
+            projectile.Explode();
+            if (health <= 0)
             {
                 Destroy();
                 return;
             }
-            void activate()
-            {
-                transform.localScale -= transform.localScale * shrinkBy;
-                ChangeColor(hitColor);
-                shieldHitTimer.Run();
-            }
-            if (shieldHitTimer == null)
-            {
-                shieldHitTimer = TimersPool.Pool.Get();
-                shieldHitTimer.Duration = animationLength;
-                shieldHitTimer.AddTimerFinishedEventListener(ResetColors);
-                activate();
-            }
-
-            if (shieldHitTimer.Running)
-                shieldHitTimer.Refresh();
-            else
-            {
-                activate();
-            }
-            projectile.Explode();
+            transform.localScale -= transform.localScale * shrinkBy;
+            shieldGlowEffect?.HitActivate(hitAnimationLength, hitDuration, hitColor);
         }
     }
 
@@ -128,42 +127,51 @@ public class Shield : MonoBehaviour, IHittable
     {
         gameObject.SetActive(false);
         shieldExplosionParticlePool?.createItem(transform);
+        shieldGlowEffect?.Reset();
         ResetShield();
     }
 
     public void ResetShield()
     {
-        transform.localScale = defaultScale; 
-        for (int i = 0; i < materials.Length; i++)
-        {
-            materials[i].SetColor("_Color", originalColors[i]);
-        }
+        health = MaxHealth;
+        transform.localScale = defaultScale;
+        shieldGlowEffect?.Reset();
+        shieldGlowEffect?.Reset();
     }
 
     public void Replenish()
     {
-        health += Mathf.Min(MaxHealth / 2, MaxHealth);
-        transform.localScale += transform.localScale * shrinkBy;
+        health += MaxHealth / 2f;
+        health = Mathf.Min(health, MaxHealth);
+        Vector3 newScale = transform.localScale + (transform.localScale * 2 * shrinkBy);
+
+        newScale.x = Mathf.Min(newScale.x, defaultScale.x);
+        newScale.y = Mathf.Min(newScale.y, defaultScale.y);
+        newScale.z = Mathf.Min(newScale.z, defaultScale.z);
+        transform.localScale = newScale;
     }
 
     public void ActivateReflection()
     {
         void activate() {
             isReflecting = true;
-            ChangeColor(reflectionColor);
+            shieldGlowEffect?.HitActivate(reflectAnimationLength, reflectionDuration, reflectionColor);
             shieldReflectionTimer.Run();
         }
 
         if (shieldReflectionTimer == null)
         {
             shieldReflectionTimer = TimersPool.Pool.Get();
-            shieldReflectionTimer.Duration = 2f;
+            shieldReflectionTimer.Duration = reflectionDuration;
             shieldReflectionTimer.AddTimerFinishedEventListener(stopReflection);
             activate();
         }
 
         if (shieldReflectionTimer.Running)
+        {
             shieldReflectionTimer.Refresh();
+            shieldGlowEffect?.HitActivate(reflectAnimationLength, reflectionDuration, reflectionColor);
+        }
         else
             activate();
     }
@@ -171,21 +179,6 @@ public class Shield : MonoBehaviour, IHittable
     private void stopReflection()
     {
         isReflecting = false;
-        ResetColors();
-    }
-    private void ChangeColor(Color color)
-    {
-        foreach (Material mat in materials)
-        {
-            mat.color = color;
-        }
-    }
-    private void ResetColors()
-    {
-        for (int i = 0; i < materials.Length; i++)
-        {
-            materials[i].color = originalColors[i];
-        }
     }
     #endregion
 }

@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 5813780877431382882}
   - component: {fileID: 7385168964632608691}
   - component: {fileID: 4799131568805796988}
-  m_Layer: 0
+  - component: {fileID: 3803066127090264806}
+  m_Layer: 8
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,8 +64,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4340200271497323869, guid: fa66de0eff807ef4cbca0daf88899c31, type: 3}
-  - {fileID: 1672032985234289266, guid: fa66de0eff807ef4cbca0daf88899c31, type: 3}
+  - {fileID: 2100000, guid: 4686352fbfa46af48886f6fcd685e8b1, type: 2}
+  - {fileID: 2100000, guid: 4686352fbfa46af48886f6fcd685e8b1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,11 +100,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 4
-  hitColor: {r: 1, g: 0, b: 0, a: 1}
-  reflectionColor: {r: 1, g: 0.68235296, b: 0, a: 1}
   shrinkBy: 0.2
-  animationLength: 0.2
+  hitAnimationLength: 0.2
+  hitDuration: 0.5
+  hitColor: {r: 1, g: 0, b: 0, a: 0}
+  reflectAnimationLength: 0.3
+  reflectionDuration: 2
+  reflectionColor: {r: 0.81999874, g: 0, b: 1, a: 0}
   shieldExplosionParticlePool: {fileID: 11400000, guid: 0a161f2bf1a98b84ba6cd8ab0f780d8e, type: 2}
+  shieldGlowEffect: {fileID: 3803066127090264806}
 --- !u!64 &4799131568805796988
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -118,3 +123,21 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6606501483488557099, guid: fa66de0eff807ef4cbca0daf88899c31, type: 3}
+--- !u!114 &3803066127090264806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5813780877431382893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20b0066806c3f0449b757c8fb98dc8f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Renderer:
+  - {fileID: 5813780877431382882}
+  referenceMaterial: {fileID: 2100000, guid: 96577862571e44a43b017597609a68b4, type: 2}
+  maxAlpha: 1
+  glowScale: 0.5
+  defaultGlowColor: {r: 1, g: 0, b: 0, a: 1}

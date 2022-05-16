@@ -12,32 +12,30 @@ public class Character : MonoBehaviour, IHittable
     [SerializeField]
     private float health = 100;
 
-    [SerializeField]
-    private Color hitColor = Color.red;
-
     [Range(0.10f, 1f)]
     [SerializeField]
-    private float animationLength = 0.2f;
+    private float hitAnimationLength = 0.2f;
+
+    [Range(0.0f, 6f)]
+    [SerializeField]
+    private float hitDuration = 2f;
 
     [SerializeField]
     private ParticlePool characterExplosionPool;
 
+    [SerializeField]
+    private GameObject shieldsTransform;
+
+    [SerializeField]
+    private HitglowEffect hitEffect;
+
     #endregion
 
-    private Material[] materials;
-    private Color[] originalColors;
     private Shield[] shields;
-    private Timer shieldHitTimer;
 
     private void Awake()
     {
-        materials = GetComponent<MeshRenderer>().materials;
-        originalColors = new Color[materials.Length];
-        for (int i = 0; i < materials.Length; i++)
-        {
-            originalColors[i] = materials[i].color;
-        }
-        shields = transform.GetComponentsInChildren<Shield>();
+        shields = shieldsTransform.GetComponentsInChildren<Shield>();
         foreach (Shield shield in shields)
         {
             shield.Initialize();
@@ -57,7 +55,7 @@ public class Character : MonoBehaviour, IHittable
 
     public void GetHit(Projectile projectile)
     {
-        if(health == 0) return;
+        if(health <= 0) return;
 
         health-=projectile.Damage;
         projectile.Explode();
@@ -66,44 +64,13 @@ public class Character : MonoBehaviour, IHittable
             Destroy();
             return;
         }
-        if (shieldHitTimer == null)
-        {
-            shieldHitTimer = TimersPool.Pool.Get();
-            shieldHitTimer.Duration = animationLength;
-            shieldHitTimer.AddTimerFinishedEventListener(ResetColors);
-            ChangeColor(hitColor);
-            shieldHitTimer.Run();
-        }
-
-        if (shieldHitTimer.Running)
-            shieldHitTimer.Refresh();
-        else
-        {
-            ChangeColor(hitColor);
-            shieldHitTimer.Run();
-        }
-    }
-
-    private void ChangeColor(Color color)
-    {
-        foreach (Material mat in materials)
-        {
-            mat.color = color;
-        }
-    }
-    private void ResetColors()
-    {
-        for (int i = 0; i < materials.Length; i++)
-        {
-
-            materials[i].color = originalColors[i];
-        }
+        hitEffect?.HitActivate(hitAnimationLength, hitDuration, null);
     }
     public void Destroy()
     {
         Camera.main.transform.parent = null;
-        transform.root.gameObject.SetActive(false);
         characterExplosionPool?.createItem(transform);
+        GetComponent<BoxCollider>().enabled = false;
         GameManager.FinishGame();
     }
 
@@ -128,6 +95,8 @@ public class Character : MonoBehaviour, IHittable
         if (randomShieldList.Count == 0)
             return;
         Shield newSh = randomShieldList[Random.Range(0, randomShieldList.Count)];
+        if (randomShieldList.Count == 3)
+            newSh.transform.parent.rotation = new Quaternion(0,0,0,0);
         newSh.ResetShield();
         newSh.gameObject.SetActive(true);
     }
