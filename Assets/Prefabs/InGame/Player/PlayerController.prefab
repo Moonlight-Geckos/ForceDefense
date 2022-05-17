@@ -420,8 +420,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d18069cd4c6fc4b95495a44a53d5e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveVerticalSpeed: 6.5
-  additiveVerticalSpeed: 2.5
+  passiveVerticalSpeed: 5
+  additiveVerticalSpeed: 6
   horizontalSpeed: 8
   rotationSpeed: 7
   speedupParticlePool: {fileID: 11400000, guid: edb3d3bd255c03a4dbd716a9b6496c12, type: 2}

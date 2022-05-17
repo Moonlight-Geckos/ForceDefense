@@ -48,7 +48,7 @@ public class SingleShooter : MonoBehaviour, IShooter, IEnemy
     public void Shoot()
     {
         if (Vector3.Distance(GameManager.PlayerPos, transform.position) > radiusOfAttack
-            || transform.position.z < GameManager.PlayerPos.z + 5)
+            || transform.position.z < GameManager.PlayerPos.z + 7)
         {
             cooldownTimer.Run();
             return;
