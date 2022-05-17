@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: f12edcc58e309454f9632714a60a9eb4
+guid: 20c07edec14515643b415af67bf1f443
 ModelImporter:
   serializedVersion: 21202
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: -203655887218126122
+    second: mixamo.com
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -16,8 +19,7 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 1
     motionNodeName: 
-    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
-      human bone 'Hips' not found\n"
+    rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -25,7 +27,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -81,27 +83,7 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton:
-    - name: Enemy1_v1(Clone)
-      parentName: 
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: -0.000000081460335, y: 0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: polySurface32
-      parentName: Enemy1_v1(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: -9.094947e-15, y: 0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: polySurface44
-      parentName: Enemy1_v1(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: -9.094947e-15, y: 0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: polySurface33
-      parentName: Enemy1_v1(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: -9.094947e-15, y: 0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
+    skeleton: []
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5

@@ -35,15 +35,15 @@ Material:
     m_Ints: []
     m_Floats:
     - _Alpha: 0.8
-    - _CellDensity: 0.34
+    - _CellDensity: 3
     - _NoiseSpeed: 1.33
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Slimness: 4.18
-    - _WaveSpeed: 0.42
+    - _Slimness: 7
+    - _WaveSpeed: 0.36
     m_Colors:
-    - _BaseColor: {r: 0, g: 0.4915254, b: 1, a: 0}
-    - _RippleColor: {r: 0, g: 0.820076, b: 1, a: 1}
+    - _BaseColor: {r: 0, g: 0.49019623, b: 1, a: 0}
+    - _RippleColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &7875292596925327790
 MonoBehaviour:
