@@ -22,9 +22,6 @@ public class World : MonoBehaviour
     [SerializeField]
     private GameObject multiplierPlane;
 
-    [SerializeField]
-    [Range(0f, 40f)]
-    private float bossDuration = 20f;
 
     [SerializeField]
     [Range(0f, 10f)]
