@@ -760,9 +760,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bffccf87e362609489457d844e7d5305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossDuration: 6
   maxMultiplier: 20
-  multiplierSpeedPerSecond: 0.2
+  bossDuration: 20
 --- !u!1 &7517568844863929134
 GameObject:
   m_ObjectHideFlags: 0

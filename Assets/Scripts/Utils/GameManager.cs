@@ -9,19 +9,14 @@ public class GameManager : MonoBehaviour
     private float maxMultiplier = 11f;
 
     [SerializeField]
-    [Range(0f, 0.4f)]
-    private float multiplierSpeedPerSecond = 0.7f;
-
-    [SerializeField]
     [Range(0f, 40f)]
-    private float bossDuration = 20f;
+    private float bossDuration = 60f;
 
     #endregion
 
     #region Private
 
     private static Transform playerPos;
-    private static Transform bossEnemy;
     private static GameManager _instance;
     private static UnityEvent<bool> finishGameEvent = new UnityEvent<bool>();
     private static UnityEvent clearPoolsEvent = new UnityEvent();
@@ -30,6 +25,7 @@ public class GameManager : MonoBehaviour
     private static float currentMultiplier = 1;
     private static int collectedGems;
     private static bool started;
+    private static bool bossSpawned;
 
     #endregion
 
@@ -41,6 +37,13 @@ public class GameManager : MonoBehaviour
     {
         get { return started; }
         set { started = value; }
+    }
+    static public bool BossSpawned
+    {
+        get
+        {
+            return bossSpawned;
+        }
     }
     static public GameManager Instance
     {
@@ -69,6 +72,13 @@ public class GameManager : MonoBehaviour
             return (int)currentMultiplier;
         }
     }
+    public float MaxMultiplier
+    {
+        get
+        {
+            return maxMultiplier;
+        }
+    }
 
     public float BossDuration
     {
@@ -87,13 +97,17 @@ public class GameManager : MonoBehaviour
         }
         clearPoolsEvent.Invoke();
         playerPos = GameObject.FindGameObjectWithTag("Character").transform;
+        spawnBossEvent.AddListener(() =>
+        {
+            bossSpawned = true;
+        });
     }
 
-    void FixedUpdate()
+    void Update()
     {
         TimersPool.UpdateTimers();
-        if(!started)
-            currentMultiplier += Time.fixedDeltaTime * maxMultiplier / bossDuration;
+        if(bossSpawned)
+            currentMultiplier = Mathf.Min(maxMultiplier, currentMultiplier + (Time.deltaTime * maxMultiplier / bossDuration));
     }
 
     public static void LoseGame()

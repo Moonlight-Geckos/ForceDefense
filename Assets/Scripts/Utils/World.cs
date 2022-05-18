@@ -34,9 +34,8 @@ public class World : MonoBehaviour
     private Transform[] groundParts = new Transform[3];
     private int currentGroundPart = 0;
     private Timer bossTimer;
-    private bool bossSpawned = true;
+    private bool bossSpawned = false;
     private Queue<GameObject> muliplierPlanesQueue = new Queue<GameObject>();
-
     private void Awake()
     {
         for (int i = 0; i < 3; i++)
@@ -103,8 +102,10 @@ public class World : MonoBehaviour
     }
     private void SpawnMultipliers()
     {
-        int curCust = Mathf.Min(GameManager.CurrentMultiplier-1, customizations.Length - 1);
-        GameObject[] multipliers = new GameObject[2];
+        int curCust = Mathf.FloorToInt(customizations.Length * (float)GameManager.CurrentMultiplier / GameManager.Instance.MaxMultiplier);
+        if (curCust == customizations.Length)
+            curCust--;
+            GameObject[] multipliers = new GameObject[2];
         for (float i = 0, j = -multiplierPlane.transform.localScale.z; i < 2; i++, j += multiplierPlane.transform.localScale.z * 2)
         {
             multipliers[(int)i] = multipliersPool.Pool.Get();
@@ -117,18 +118,19 @@ public class World : MonoBehaviour
     }
     private void SpawnBoss()
     {
+        bossSpawned = true;
         IEnumerator spawn()
         {
-            yield return new WaitForSeconds(2);
-            bossSpawned = true;
+            yield return new WaitForSeconds(1);
             GameObject bossEnemy = Instantiate(carriageBoss);
-            bossEnemy.SetActive(true);
             bossEnemy.GetComponent<Carriage>().enabled = true;
+            bossEnemy.GetComponent<Carriage>().Initialize();
             bossTimer = TimersPool.Pool.Get();
             bossTimer.Duration = GameManager.Instance.BossDuration;
+            Debug.Log(GameManager.Instance.BossDuration);
             bossTimer.AddTimerFinishedEventListener(() =>
             {
-                if (GameManager.Started)
+                if (GameManager.BossSpawned)
                     GameManager.SpawnCastleEvent.Invoke();
             });
             bossTimer.Run();

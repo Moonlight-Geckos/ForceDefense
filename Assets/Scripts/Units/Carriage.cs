@@ -21,7 +21,7 @@ public class Carriage : MonoBehaviour, IEnemy
     private float startTime;
     private SingleShooter[] shooters = new SingleShooter[3];
     private bool initialized = false;
-    private void Initialize()
+    public void Initialize()
     {
         initialized = true;
         distance = World.Limits.z * 4;

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,7 +15,13 @@ public class WorldTriggers : MonoBehaviour
             return;
         triggered = true;
         Action.Invoke();
-        Destroy(gameObject);
+        IEnumerator destroy()
+        {
+            yield return new WaitForSeconds(4);
+            if(gameObject != null)
+                Destroy(gameObject);
+        }
+        StartCoroutine(destroy());
     }
 
     public void SpawnBoss()
