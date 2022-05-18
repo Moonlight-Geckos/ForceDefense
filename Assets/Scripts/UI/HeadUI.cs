@@ -26,7 +26,7 @@ public class HeadUI : MonoBehaviour
 
     }
 
-    private void finishGame()
+    private void finishGame(bool win)
     {
         IEnumerator activate()
         {

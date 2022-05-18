@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ShieldReplenish : MonoBehaviour,IPowerup
+public class ShieldReplenish : MonoBehaviour,IPickable
 {
     bool triggered = false;
     private void OnTriggerEnter(Collider other)
@@ -8,10 +8,10 @@ public class ShieldReplenish : MonoBehaviour,IPowerup
         if (triggered)
             return;
         triggered = true;
-        Activate(other.transform);
+        Pickup(other.transform);
     }
 
-    public void Activate(Transform effected)
+    public void Pickup(Transform effected)
     {
         Character character = effected.transform.root.GetComponentInChildren<Character>();
         character.ReplenishShield();

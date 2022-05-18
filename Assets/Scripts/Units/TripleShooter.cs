@@ -19,6 +19,10 @@ public class TripleShooter : MonoBehaviour, IShooter, IEnemy
     [SerializeField]
     private float radiusOfAttack = 20;
 
+    [SerializeField]
+    [Range(0.05f, 30f)]
+    private float zDifference = 8f;
+
     #endregion
 
     private Transform startCenterProjectilePos;
@@ -41,7 +45,7 @@ public class TripleShooter : MonoBehaviour, IShooter, IEnemy
 
         cooldownTimer = TimersPool.Pool.Get();
         cooldownTimer.Duration = Cooldown;
-        cooldownTimer.AddTimerFinishedEventListener(Shoot);
+        cooldownTimer.AddTimerFinishedEventListener(AutoShoot);
         cooldownTimer.Run();
     }
     private void Update()
@@ -50,14 +54,13 @@ public class TripleShooter : MonoBehaviour, IShooter, IEnemy
         transform.rotation = new Quaternion(transform.rotation.x, newRotation.y, transform.rotation.z, newRotation.w);
     }
 
-    public void Shoot()
+    public void Shoot(Vector3? direction)
     {
-        if (Vector3.Distance(GameManager.PlayerPos, transform.position) > radiusOfAttack
-            || transform.position.z < GameManager.PlayerPos.z + 5)
+        if (direction == null)
         {
-            cooldownTimer.Run();
-            return;
+            direction = GameManager.PlayerPos;
         }
+        Vector3 Direction = (Vector3)direction;
         GameObject[] projectiles = new GameObject[3];
         projectiles[0] = projectilePool.Pool.Get(); ;
         projectiles[0].transform.position = startCenterProjectilePos.position;
@@ -83,12 +86,26 @@ public class TripleShooter : MonoBehaviour, IShooter, IEnemy
         projectiles[0].SetActive(true);
         projectiles[1].SetActive(true);
         projectiles[2].SetActive(true);
-        cooldownTimer.Run();
     }
     public void OnDestroy()
     {
         if (cooldownTimer != null)
             TimersPool.Pool.Release(cooldownTimer);
+    }
+
+    private void AutoShoot()
+    {
+        Vector3 Direction = (Vector3)GameManager.PlayerPos;
+        if (Vector3.Distance(Direction, transform.position) > radiusOfAttack
+            || Mathf.Abs(transform.position.z - Direction.z) < zDifference
+            || transform.position.z < Direction.z)
+        {
+            cooldownTimer.Run();
+            return;
+        }
+        Shoot(Direction);
+        cooldownTimer.Run();
+
     }
 
     void OnDrawGizmosSelected()

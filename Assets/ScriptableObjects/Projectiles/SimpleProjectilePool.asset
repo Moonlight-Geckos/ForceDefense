@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SimpleProjectilePool
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 478126731065744311, guid: 0e31d479e1ae08147b7de5211bf8bb10, type: 3}
-  maxPoolSize: 10
+  maxPoolSize: 50

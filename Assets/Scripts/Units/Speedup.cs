@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Speedup : MonoBehaviour, IPowerup
+public class Speedup : MonoBehaviour, IPickable
 {
 
     #region Serialized
@@ -16,10 +16,10 @@ public class Speedup : MonoBehaviour, IPowerup
         if (triggered)
             return;
         triggered = true;
-        Activate(other.transform);
+        Pickup(other.transform);
     }
 
-    public void Activate(Transform effectedTF)
+    public void Pickup(Transform effectedTF)
     {
         PlayerControl control = effectedTF.root.GetComponent<PlayerControl>();
         control?.Speedup(speedupValue);

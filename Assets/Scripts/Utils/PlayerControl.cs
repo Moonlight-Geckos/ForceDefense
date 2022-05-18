@@ -30,18 +30,24 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]
     private Transform characterTransform;
 
+    [SerializeField]
+    private Transform camerasTransform;
+
     #endregion
 
     private Joystick joystick;
     private Rigidbody mainRigidbody;
     private Animator animator;
+    private Animator cameraAnimator;
 
     private void Awake()
     {
         joystick = FindObjectOfType<Joystick>();
         mainRigidbody = GetComponent<Rigidbody>();
         animator = characterTransform.GetComponent<Animator>();
+        cameraAnimator = camerasTransform.GetComponent<Animator>();
         GameManager.FinishGameEvent.AddListener(finishGame);
+        GameManager.SpawnBossEvent.AddListener(BossMode);
     }
     private void Start()
     {
@@ -100,11 +106,22 @@ public class PlayerControl : MonoBehaviour
         animator.speed += 0.05f;
     }
 
-    private void finishGame()
+    private void finishGame(bool win)
     {
         mainRigidbody.velocity = Vector3.zero;
         animator.speed = 1;
-        animator.SetBool("Dead", true);
+        if (win)
+        {
+            animator.SetBool("Dance", true);
+            cameraAnimator.SetBool("Win", true);
+        }
+        else
+            animator.SetBool("Dead", true);
         this.enabled = false;
+    }
+
+    private void BossMode()
+    {
+        cameraAnimator.SetBool("Boss", true);
     }
 }

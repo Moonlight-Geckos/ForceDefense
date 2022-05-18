@@ -822,3 +822,5 @@ MonoBehaviour:
   projectileSpeed: 15
   Cooldown: 1.5
   radiusOfAttack: 30
+  zDifference: 8
+  autoShoot: 1

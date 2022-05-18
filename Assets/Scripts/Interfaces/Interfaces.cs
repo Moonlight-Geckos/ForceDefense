@@ -16,7 +16,7 @@ public interface IEffector
 }
 public interface IShooter
 {
-    public void Shoot();
+    public void Shoot(Vector3? direction);
 }
 public interface IEnemy
 {
@@ -26,7 +26,7 @@ public interface IEnemy
     }
     void OnDestroy();
 }
-public interface IPowerup
+public interface IPickable
 {
-    public void Activate(Transform transform);
+    public void Pickup(Transform transform);
 }

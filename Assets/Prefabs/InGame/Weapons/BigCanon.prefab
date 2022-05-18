@@ -421,6 +421,8 @@ MonoBehaviour:
   projectileSpeed: 15
   Cooldown: 2
   radiusOfAttack: 30
+  zDifference: 8
+  autoShoot: 1
 --- !u!4 &4362681768273100337 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c27ddd2bf43f86045a00e9f90dc9319d, type: 3}

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ShieldReflection : MonoBehaviour, IPowerup
+public class ShieldReflection : MonoBehaviour, IPickable
 {
     bool triggered = false;
     private void OnTriggerEnter(Collider other)
@@ -8,10 +8,10 @@ public class ShieldReflection : MonoBehaviour, IPowerup
         if (triggered)
             return;
         triggered = true;
-        Activate(other.transform);
+        Pickup(other.transform);
     }
 
-    public void Activate(Transform effectedTF)
+    public void Pickup(Transform effectedTF)
     {
         Character character = effectedTF.root.GetComponentInChildren<Character>();
         character?.ActivateReflection();

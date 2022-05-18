@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d67a9fb207046448afdefd2f7fff72, type: 3}
   m_Name: CharacterDeadParticlePool
   m_EditorClassIdentifier: 
-  makeParent: 1
+  makeParent: 0
   particlesHead: {fileID: 8162806762384191799, guid: 30094b479c90db049975cadf2ffebe7a, type: 3}
   maxPoolSize: 10

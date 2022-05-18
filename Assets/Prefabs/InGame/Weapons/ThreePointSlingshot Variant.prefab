@@ -572,6 +572,7 @@ MonoBehaviour:
   projectileSpeed: 15
   Cooldown: 1.7
   radiusOfAttack: 30
+  zDifference: 8
 --- !u!4 &1026221065242998426 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: de2e5500cede00a46b3fe461c7be80a4, type: 3}
