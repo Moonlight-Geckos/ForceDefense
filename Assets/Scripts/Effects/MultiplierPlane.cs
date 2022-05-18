@@ -20,13 +20,13 @@ public class MultiplierPlane : MonoBehaviour
         text = GetComponentInChildren<TextMeshPro>();
     }
 
-    public void ChangeCustomization(MultiplierCustomization customization)
+    public void ChangeCustomization(MultiplierCustomization customization,float alphaValue)
     {
         if(text == null)
         {
             Initialize();
         }
-        customization.planeColor.a = 0.4f;
+        customization.planeColor.a = alphaValue;
         plane.material.color = customization.planeColor;
         text.text = "+ " + GameManager.CurrentMultiplier.ToString();
         text.faceColor = new Color32(

@@ -5,6 +5,10 @@ using UnityEngine;
 public class World : MonoBehaviour
 {
     [SerializeField]
+    [Range(0f, 1f)]
+    private float alphaValue = 0.4f;
+
+    [SerializeField]
     private MultiplierCustomization[] customizations;
 
     [SerializeField]
@@ -107,7 +111,7 @@ public class World : MonoBehaviour
             multipliers[(int)i].transform.position = new Vector3(0, multipliers[(int)i].transform.position.y,
                 groundParts[currentGroundPart].position.z + 5 * j
             );
-            multipliers[(int)i].GetComponent<MultiplierPlane>().GetComponent<MultiplierPlane>().ChangeCustomization(customizations[curCust]);
+            multipliers[(int)i].GetComponent<MultiplierPlane>().GetComponent<MultiplierPlane>().ChangeCustomization(customizations[curCust], alphaValue);
             muliplierPlanesQueue.Enqueue(multipliers[(int)i]);
         }
     }
