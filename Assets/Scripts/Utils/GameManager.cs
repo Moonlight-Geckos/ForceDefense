@@ -70,6 +70,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public float BossDuration
+    {
+        get { return bossDuration; }
+    }
+
     private void Awake()
     {
         if (_instance != null && _instance != this)

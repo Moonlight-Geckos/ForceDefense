@@ -121,7 +121,7 @@ public class World : MonoBehaviour
             bossEnemy.SetActive(true);
             bossEnemy.GetComponent<Carriage>().enabled = true;
             bossTimer = TimersPool.Pool.Get();
-            bossTimer.Duration = bossDuration;
+            bossTimer.Duration = GameManager.Instance.BossDuration;
             bossTimer.AddTimerFinishedEventListener(() =>
             {
                 if (GameManager.Started)
