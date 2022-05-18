@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
     {
         TimersPool.UpdateTimers();
         if(!started)
-            currentMultiplier = Time.deltaTime * maxMultiplier / bossDuration;
+            currentMultiplier += Time.deltaTime * maxMultiplier / bossDuration;
     }
 
     public static void LoseGame()

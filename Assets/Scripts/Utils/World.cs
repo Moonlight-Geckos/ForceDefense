@@ -99,7 +99,7 @@ public class World : MonoBehaviour
     }
     private void SpawnMultipliers()
     {
-        int curCust = Mathf.Min(GameManager.CurrentMultiplier - 1, customizations.Length - 1);
+        int curCust = Mathf.Min(GameManager.CurrentMultiplier-1, customizations.Length - 1);
         GameObject[] multipliers = new GameObject[2];
         for (float i = 0, j = -multiplierPlane.transform.localScale.z; i < 2; i++, j += multiplierPlane.transform.localScale.z * 2)
         {
