@@ -127,6 +127,10 @@ public class GameManager : MonoBehaviour
         toFinishProgress = 0;
         toMultiplierProgress = 0;
         SpawnCastleEvent.AddListener(KilledBoss);
+        currentMultiplierInd = 0;
+        collectedGems = 0;
+        started = false;
+        bossSpawned = false;
     }
 
     void Update()

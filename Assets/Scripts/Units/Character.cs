@@ -10,7 +10,7 @@ public class Character : MonoBehaviour, IHittable
 
     [Range(1, 100)]
     [SerializeField]
-    private float health = 100;
+    private float maxHealth = 20f;
 
     [Range(0.10f, 1f)]
     [SerializeField]
@@ -29,9 +29,13 @@ public class Character : MonoBehaviour, IHittable
     [SerializeField]
     private HitglowEffect hitEffect;
 
-    #endregion
+    [SerializeField]
+    private HealthBar healthBar;
 
+    #endregion
     private Shield[] shields;
+    [SerializeField]
+    private float health = 100f;
 
     private void Awake()
     {
@@ -40,6 +44,7 @@ public class Character : MonoBehaviour, IHittable
         {
             shield.Initialize();
         }
+        health = maxHealth;
     }
     private void Start()
     {
@@ -55,15 +60,14 @@ public class Character : MonoBehaviour, IHittable
 
     public void GetHit(Projectile projectile)
     {
-        if(health <= 0) return;
-
-        health-=projectile.Damage;
-        projectile.Explode();
         if (health <= 0)
         {
             Destroy();
             return;
         }
+        health -= projectile.Damage;
+        projectile.Explode();
+        healthBar?.UpdateValue(health/maxHealth);
         hitEffect?.HitActivate(hitAnimationLength, hitDuration, null);
     }
     public void Destroy()
@@ -71,6 +75,8 @@ public class Character : MonoBehaviour, IHittable
         Camera.main.transform.parent = null;
         characterExplosionPool?.createItem(transform);
         GetComponent<BoxCollider>().enabled = false;
+        healthBar?.ResetEffect();
+        hitEffect?.Reset();
         GameManager.FinishGameEvent.Invoke(false);
     }
 
