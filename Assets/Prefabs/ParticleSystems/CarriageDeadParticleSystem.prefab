@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8162806762384191802}
   - component: {fileID: 8162806762384191801}
   - component: {fileID: 8162806762384191800}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarriageDeadParticleSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}

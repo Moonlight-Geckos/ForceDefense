@@ -6368,7 +6368,7 @@ GameObject:
   - component: {fileID: 1250448875160039401}
   m_Layer: 10
   m_Name: BossTrigger
-  m_TagString: Untagged
+  m_TagString: BossTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

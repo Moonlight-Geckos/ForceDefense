@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Character
   - Boss
+  - BossTrigger
   layers:
   - Default
   - TransparentFX

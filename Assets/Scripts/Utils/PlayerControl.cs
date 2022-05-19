@@ -41,14 +41,14 @@ public class PlayerControl : MonoBehaviour
 
     private Joystick joystick;
     private Rigidbody mainRigidbody;
-    private Animator animator;
+    private Animator characterAnimator;
     private Animator cameraAnimator;
     private bool horizontalBoost = false;
     private void Awake()
     {
         joystick = FindObjectOfType<Joystick>();
         mainRigidbody = GetComponent<Rigidbody>();
-        animator = characterTransform.GetComponent<Animator>();
+        characterAnimator = characterTransform.GetComponent<Animator>();
         cameraAnimator = camerasTransform.GetComponent<Animator>();
         GameManager.FinishGameEvent.AddListener(finishGame);
         GameManager.SpawnBossEvent.AddListener(BossMode);
@@ -107,7 +107,7 @@ public class PlayerControl : MonoBehaviour
         horizontalSpeed += addition;
         passiveVerticalSpeed += addition;
         additiveVerticalSpeed += addition;
-        animator.speed += 0.05f;
+        characterAnimator.speed += 0.05f;
     }
 
     public void HorizontalBoost(bool act)
@@ -118,14 +118,14 @@ public class PlayerControl : MonoBehaviour
     private void finishGame(bool win)
     {
         mainRigidbody.velocity = Vector3.zero;
-        animator.speed = 1;
+        characterAnimator.speed = 1;
         if (win)
         {
-            animator.SetBool("Dance", true);
+            characterAnimator.SetBool("Dance", true);
             cameraAnimator.SetBool("Win", true);
         }
         else
-            animator.SetBool("Dead", true);
+            characterAnimator.SetBool("Dead", true);
         this.enabled = false;
     }
 

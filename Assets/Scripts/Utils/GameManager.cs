@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     #region Private
 
     private static Transform playerPos;
+    private static Transform bossTrigerPos;
     private static GameManager _instance;
     private static UnityEvent<bool> finishGameEvent = new UnityEvent<bool>();
     private static UnityEvent clearPoolsEvent = new UnityEvent();
@@ -23,7 +24,9 @@ public class GameManager : MonoBehaviour
     private static int collectedGems;
     private static bool started;
     private static bool bossSpawned;
-
+    private static float toMultiplierProgress;
+    private static float toFinishProgress = 0;
+    private float toMultiplierDistance = 0;
     #endregion
 
     static public Vector3 PlayerPos
@@ -86,6 +89,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public float ToMultiplierProgress
+    {
+        get
+        {
+            return toMultiplierProgress;
+        }
+    }
+    public float ToFinishProgress
+    {
+        get
+        {
+            return toFinishProgress;
+        }
+    }
+    public int CollectedGems
+    {
+        get
+        {
+            return collectedGems;
+        }
+    }
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -98,20 +123,24 @@ public class GameManager : MonoBehaviour
         }
         clearPoolsEvent.Invoke();
         playerPos = GameObject.FindGameObjectWithTag("Character").transform;
+        bossTrigerPos = GameObject.FindGameObjectWithTag("BossTrigger").transform;
+        toFinishProgress = 0;
+        toMultiplierProgress = 0;
+        SpawnCastleEvent.AddListener(KilledBoss);
     }
 
     void Update()
     {
         TimersPool.UpdateTimers();
-    }
-
-    public void LoseGame()
-    {
-        started = false;
-        finishGameEvent.Invoke(false);
+        HeadUI.Instance.UpdateProgress();
+        if (bossTrigerPos != null && playerPos.position.z <= bossTrigerPos.position.z)
+            toMultiplierProgress = 1 - (Vector3.Distance(playerPos.position, bossTrigerPos.position) / toMultiplierDistance);
+        else
+            toMultiplierProgress = 1;
     }
     public void AddGem()
     {
+        HeadUI.Instance.UpdateGems();
         collectedGems += CurrentMultiplier;
     }
     public void IncrementMultiplier()
@@ -122,5 +151,10 @@ public class GameManager : MonoBehaviour
         {
             FinalizeGame.Invoke();
         }
+        toFinishProgress = Mathf.Pow((float)(currentMultiplierInd) / maxMultipliers.Length, 2);
+    }
+    void KilledBoss()
+    {
+        toFinishProgress = 1;
     }
 }
