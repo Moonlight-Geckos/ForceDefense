@@ -21,6 +21,10 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]
     float rotationSpeed = 4;
 
+    [Range(1f, 20f)]
+    [SerializeField]
+    float wallHorizontalBoostSpeed = 4;
+
     [SerializeField]
     private ParticlePool speedupParticlePool;
 
@@ -39,7 +43,7 @@ public class PlayerControl : MonoBehaviour
     private Rigidbody mainRigidbody;
     private Animator animator;
     private Animator cameraAnimator;
-
+    private bool horizontalBoost = false;
     private void Awake()
     {
         joystick = FindObjectOfType<Joystick>();
@@ -65,7 +69,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         Vector3 newVelocity = new Vector3(
-            horizontalMove * horizontalSpeed,
+            horizontalMove * (horizontalSpeed + (horizontalBoost? wallHorizontalBoostSpeed : 0)),
             0,
             (additiveVerticalSpeed * verticalMove) + passiveVerticalSpeed
         );
@@ -104,6 +108,11 @@ public class PlayerControl : MonoBehaviour
         passiveVerticalSpeed += addition;
         additiveVerticalSpeed += addition;
         animator.speed += 0.05f;
+    }
+
+    public void HorizontalBoost(bool act)
+    {
+        horizontalBoost = act;
     }
 
     private void finishGame(bool win)
