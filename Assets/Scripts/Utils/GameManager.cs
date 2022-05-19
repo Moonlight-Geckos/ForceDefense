@@ -40,10 +40,8 @@ public class GameManager : MonoBehaviour
     }
     static public bool BossSpawned
     {
-        get
-        {
-            return bossSpawned;
-        }
+        get { return bossSpawned; }
+        set { bossSpawned = value; }
     }
     static public GameManager Instance
     {
@@ -97,10 +95,6 @@ public class GameManager : MonoBehaviour
         }
         clearPoolsEvent.Invoke();
         playerPos = GameObject.FindGameObjectWithTag("Character").transform;
-        spawnBossEvent.AddListener(() =>
-        {
-            bossSpawned = true;
-        });
     }
 
     void Update()

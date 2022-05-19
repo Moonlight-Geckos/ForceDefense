@@ -94,19 +94,20 @@ public class World : MonoBehaviour
             gem.transform.position = new Vector3(Random.Range(-boundary, boundary), 0, groundParts[currentGroundPart].transform.position.z + i);
         }
     }
-    private void SpawnMultipliers()
+    private void SpawnMultipliers(int ind = -1)
     {
         int curCust = Mathf.FloorToInt(customizations.Length * (float)GameManager.CurrentMultiplier / GameManager.Instance.MaxMultiplier);
         if (curCust == customizations.Length)
             curCust--;
-
-        MultiplierPlane mp=groundParts[currentGroundPart].GetComponentInChildren<MultiplierPlane>();
+        if (ind == -1)
+            ind = currentGroundPart;
+        MultiplierPlane mp=groundParts[ind].GetComponentInChildren<MultiplierPlane>();
         if (mp != null)
         {
             Destroy(mp.gameObject);
         }
         GameObject multiplier = multipliersPool.Pool.Get();;
-        multiplier.transform.parent = groundParts[currentGroundPart].transform;
+        multiplier.transform.parent = groundParts[ind].transform;
         multiplier.transform.localPosition = Vector3.zero;
         multiplier.transform.localScale = Vector3.one;
         multiplier.GetComponent<MultiplierPlane>().ChangeCustomization(customizations[curCust], alphaValue);
@@ -116,7 +117,8 @@ public class World : MonoBehaviour
         bossSpawned = true;
         IEnumerator spawn()
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
+            GameManager.BossSpawned = true;
             GameObject bossEnemy = Instantiate(carriageBoss);
             bossEnemy.GetComponent<Carriage>().enabled = true;
             bossEnemy.GetComponent<Carriage>().Initialize();
