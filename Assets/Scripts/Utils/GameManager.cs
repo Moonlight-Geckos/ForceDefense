@@ -5,12 +5,8 @@ public class GameManager : MonoBehaviour
 {
     #region Serialized
     [SerializeField]
-    [Range(0f, 40f)]
-    private int maxMultiplier = 15;
+    private int[] maxMultipliers;
 
-    [SerializeField]
-    [Range(0f, 40f)]
-    private int multiplierIncremental = 1;
 
     #endregion
 
@@ -23,7 +19,7 @@ public class GameManager : MonoBehaviour
     private static UnityEvent spawnBossEvent = new UnityEvent();
     private static UnityEvent finalizeGame = new UnityEvent();
     private static UnityEvent spawnCastleEvent = new UnityEvent();
-    private static int currentMultiplier = 1;
+    private static int currentMultiplierInd = 0;
     private static int collectedGems;
     private static bool started;
     private static bool bossSpawned;
@@ -68,18 +64,25 @@ public class GameManager : MonoBehaviour
     {
         get { return finalizeGame; }
     }
-    static public int CurrentMultiplier
+    public int CurrentMultiplier
     {
         get
         {
-            return currentMultiplier;
+            return maxMultipliers[currentMultiplierInd];
         }
     }
-    public float MaxMultiplier
+    public int CurrentMultiplierInd
     {
         get
         {
-            return maxMultiplier;
+            return currentMultiplierInd;
+        }
+    }
+    public int MultipliersCount
+    {
+        get
+        {
+            return maxMultipliers.Length;
         }
     }
 
@@ -102,20 +105,20 @@ public class GameManager : MonoBehaviour
         TimersPool.UpdateTimers();
     }
 
-    public static void LoseGame()
+    public void LoseGame()
     {
         started = false;
         finishGameEvent.Invoke(false);
     }
-    public static void AddGem()
+    public void AddGem()
     {
         collectedGems += CurrentMultiplier;
     }
     public void IncrementMultiplier()
     {
-        if(currentMultiplier < maxMultiplier)
-            currentMultiplier += multiplierIncremental;
-        else if(currentMultiplier >= maxMultiplier)
+        if(currentMultiplierInd < maxMultipliers.Length - 1)
+            currentMultiplierInd++;
+        else
         {
             FinalizeGame.Invoke();
         }

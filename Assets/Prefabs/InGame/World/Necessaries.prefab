@@ -760,8 +760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bffccf87e362609489457d844e7d5305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMultiplier: 20
-  bossDuration: 20
+  maxMultipliers: 01000000050000000a0000000f00000014000000
 --- !u!1 &7517568844863929134
 GameObject:
   m_ObjectHideFlags: 0

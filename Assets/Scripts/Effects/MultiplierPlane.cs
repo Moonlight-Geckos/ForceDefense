@@ -28,7 +28,7 @@ public class MultiplierPlane : MonoBehaviour
         }
         customization.planeColor.a = alphaValue;
         plane.material.color = customization.planeColor;
-        text.text = "x " + GameManager.CurrentMultiplier.ToString();
+        text.text = "x " + GameManager.Instance.CurrentMultiplier.ToString();
         text.faceColor = new Color32(
             (byte)(customization.textColor.r * 255),
             (byte)(customization.textColor.g * 255),

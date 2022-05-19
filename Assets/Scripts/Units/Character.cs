@@ -71,7 +71,7 @@ public class Character : MonoBehaviour, IHittable
         Camera.main.transform.parent = null;
         characterExplosionPool?.createItem(transform);
         GetComponent<BoxCollider>().enabled = false;
-        GameManager.LoseGame();
+        GameManager.Instance.LoseGame();
     }
 
     public void ReplenishShield()
@@ -117,6 +117,6 @@ public class Character : MonoBehaviour, IHittable
         Camera.main.transform.parent = null;
         characterExplosionPool?.createItem(transform);
         GetComponent<BoxCollider>().enabled = false;
-        GameManager.LoseGame();
+        GameManager.Instance.LoseGame();
     }
 }

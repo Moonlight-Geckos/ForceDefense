@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6013668964227982471}
   - component: {fileID: 6013668964227982464}
   - component: {fileID: 6013668964227982465}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 7156706787682030192}
   - component: {fileID: 4950948776081286842}
   - component: {fileID: 6439778686883388987}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Castle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,5 +273,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b430547a6e8e4fd4590c46129bcf15b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredZPosition: 30
-  animationSpeed: 0.5

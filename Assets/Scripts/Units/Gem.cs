@@ -7,7 +7,7 @@ public class Gem : MonoBehaviour, IPickable
     public void Pickup(Transform transform)
     {
         pickupParticlePool.createItem(transform);
-        GameManager.AddGem();
+        GameManager.Instance.AddGem();
         IDisposable disposable;
         TryGetComponent<IDisposable>(out disposable);
         if (disposable != null)

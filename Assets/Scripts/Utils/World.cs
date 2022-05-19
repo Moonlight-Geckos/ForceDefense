@@ -61,18 +61,16 @@ public class World : MonoBehaviour
             Vector3 newPos = groundParts[currentGroundPart].position;
             newPos.z = groundParts[nextGroundIndex(currentGroundPart)].position.z + Limits.z*2;
             groundParts[currentGroundPart].position = newPos;
+            if (spawnFinalizeTrigger)
+            {
+                SpawnTrigger();
+                spawnFinalizeTrigger = false;
+            }
             if (bossSpawned)
             {
-                GameManager.Instance.IncrementMultiplier();
                 ClearMultiplier();
-                if (spawnFinalizeTrigger)
-                {
-                    SpawnTrigger();
-                    bossSpawned = false;
-                    spawnFinalizeTrigger = false;
-                }
-                else
-                    SpawnMultipliers();
+                SpawnMultipliers();
+                GameManager.Instance.IncrementMultiplier();
             }
             else
             {
@@ -123,7 +121,7 @@ public class World : MonoBehaviour
     }
     private void SpawnMultipliers(int ind = -1)
     {
-        int curCust = Mathf.FloorToInt(customizations.Length * (float)GameManager.CurrentMultiplier / GameManager.Instance.MaxMultiplier);
+        int curCust = Mathf.FloorToInt(customizations.Length * (float)GameManager.Instance.CurrentMultiplierInd / GameManager.Instance.MultipliersCount);
         if (curCust == customizations.Length)
             curCust--;
         if (ind == -1)
@@ -157,7 +155,6 @@ public class World : MonoBehaviour
     }
     private void SpawnTrigger()
     {
-        bossSpawned = false;
         GameObject castle = Instantiate(finalizeTrigger);
         castle.SetActive(true);
         int ind = nextGroundIndex(nextGroundIndex(currentGroundPart));
