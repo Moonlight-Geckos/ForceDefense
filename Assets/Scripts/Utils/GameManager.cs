@@ -6,11 +6,11 @@ public class GameManager : MonoBehaviour
     #region Serialized
     [SerializeField]
     [Range(0f, 40f)]
-    private float maxMultiplier = 11f;
+    private int maxMultiplier = 15;
 
     [SerializeField]
     [Range(0f, 40f)]
-    private float bossDuration = 60f;
+    private int multiplierIncremental = 1;
 
     #endregion
 
@@ -21,8 +21,9 @@ public class GameManager : MonoBehaviour
     private static UnityEvent<bool> finishGameEvent = new UnityEvent<bool>();
     private static UnityEvent clearPoolsEvent = new UnityEvent();
     private static UnityEvent spawnBossEvent = new UnityEvent();
+    private static UnityEvent finalizeGame = new UnityEvent();
     private static UnityEvent spawnCastleEvent = new UnityEvent();
-    private static float currentMultiplier = 1;
+    private static int currentMultiplier = 1;
     private static int collectedGems;
     private static bool started;
     private static bool bossSpawned;
@@ -63,11 +64,15 @@ public class GameManager : MonoBehaviour
     {
         get { return spawnCastleEvent; }
     }
+    static public UnityEvent FinalizeGame
+    {
+        get { return finalizeGame; }
+    }
     static public int CurrentMultiplier
     {
         get
         {
-            return (int)currentMultiplier;
+            return currentMultiplier;
         }
     }
     public float MaxMultiplier
@@ -76,11 +81,6 @@ public class GameManager : MonoBehaviour
         {
             return maxMultiplier;
         }
-    }
-
-    public float BossDuration
-    {
-        get { return bossDuration; }
     }
 
     private void Awake()
@@ -100,8 +100,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         TimersPool.UpdateTimers();
-        if(bossSpawned)
-            currentMultiplier = Mathf.Min(maxMultiplier, currentMultiplier + (Time.deltaTime * maxMultiplier / bossDuration));
     }
 
     public static void LoseGame()
@@ -112,5 +110,14 @@ public class GameManager : MonoBehaviour
     public static void AddGem()
     {
         collectedGems += CurrentMultiplier;
+    }
+    public void IncrementMultiplier()
+    {
+        if(currentMultiplier < maxMultiplier)
+            currentMultiplier += multiplierIncremental;
+        else if(currentMultiplier >= maxMultiplier)
+        {
+            FinalizeGame.Invoke();
+        }
     }
 }

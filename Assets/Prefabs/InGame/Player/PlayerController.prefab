@@ -119,7 +119,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 6528
+    m_Bits: 2432
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -338,7 +338,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1143
+    m_Bits: 5239
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -445,6 +445,7 @@ MonoBehaviour:
   additiveVerticalSpeed: 6
   horizontalSpeed: 8
   rotationSpeed: 7
+  wallHorizontalBoostSpeed: 4
   speedupParticlePool: {fileID: 11400000, guid: edb3d3bd255c03a4dbd716a9b6496c12, type: 2}
   shieldsTransform: {fileID: 8920674134181505889}
   characterTransform: {fileID: 2671475453700567985}

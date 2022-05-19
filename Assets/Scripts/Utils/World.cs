@@ -24,6 +24,9 @@ public class World : MonoBehaviour
     private GameObject castleObject;
 
     [SerializeField]
+    private GameObject finalizeTrigger;
+
+    [SerializeField]
     private GameObject multiplierPlane;
 
 
@@ -33,8 +36,8 @@ public class World : MonoBehaviour
     static private Vector3 limits;
     private Transform[] groundParts = new Transform[3];
     private int currentGroundPart = 0;
-    private Timer bossTimer;
     private bool bossSpawned = false;
+    private bool spawnFinalizeTrigger = false;
     private void Awake()
     {
         for (int i = 0; i < 3; i++)
@@ -44,6 +47,10 @@ public class World : MonoBehaviour
         limits = transform.GetChild(0).GetComponent<MeshRenderer>().bounds.size;
         GameManager.SpawnBossEvent.AddListener(SpawnBoss);
         GameManager.SpawnCastleEvent.AddListener(SpawnCastle);
+        GameManager.FinalizeGame.AddListener(() =>
+        {
+            spawnFinalizeTrigger = true;
+        });
 
     }
 
@@ -56,7 +63,16 @@ public class World : MonoBehaviour
             groundParts[currentGroundPart].position = newPos;
             if (bossSpawned)
             {
-                SpawnMultipliers();
+                GameManager.Instance.IncrementMultiplier();
+                ClearMultiplier();
+                if (spawnFinalizeTrigger)
+                {
+                    SpawnTrigger();
+                    bossSpawned = false;
+                    spawnFinalizeTrigger = false;
+                }
+                else
+                    SpawnMultipliers();
             }
             else
             {
@@ -94,6 +110,17 @@ public class World : MonoBehaviour
             gem.transform.position = new Vector3(Random.Range(-boundary, boundary), 0, groundParts[currentGroundPart].transform.position.z + i);
         }
     }
+
+    private void ClearMultiplier(int ind = -1)
+    {
+        if (ind == -1)
+            ind = currentGroundPart;
+        MultiplierPlane mp = groundParts[ind].GetComponentInChildren<MultiplierPlane>();
+        if (mp != null)
+        {
+            Destroy(mp.gameObject);
+        }
+    }
     private void SpawnMultipliers(int ind = -1)
     {
         int curCust = Mathf.FloorToInt(customizations.Length * (float)GameManager.CurrentMultiplier / GameManager.Instance.MaxMultiplier);
@@ -101,11 +128,6 @@ public class World : MonoBehaviour
             curCust--;
         if (ind == -1)
             ind = currentGroundPart;
-        MultiplierPlane mp=groundParts[ind].GetComponentInChildren<MultiplierPlane>();
-        if (mp != null)
-        {
-            Destroy(mp.gameObject);
-        }
         GameObject multiplier = multipliersPool.Pool.Get();;
         multiplier.transform.parent = groundParts[ind].transform;
         multiplier.transform.localPosition = Vector3.zero;
@@ -122,23 +144,23 @@ public class World : MonoBehaviour
             GameObject bossEnemy = Instantiate(carriageBoss);
             bossEnemy.GetComponent<Carriage>().enabled = true;
             bossEnemy.GetComponent<Carriage>().Initialize();
-            bossTimer = TimersPool.Pool.Get();
-            bossTimer.Duration = GameManager.Instance.BossDuration;
-            Debug.Log(GameManager.Instance.BossDuration);
-            bossTimer.AddTimerFinishedEventListener(() =>
-            {
-                if (GameManager.BossSpawned)
-                    GameManager.SpawnCastleEvent.Invoke();
-            });
-            bossTimer.Run();
         }
         StartCoroutine(spawn());
     }
     private void SpawnCastle()
     {
+        bossSpawned = false;
         GameObject castle = Instantiate(castleObject);
         castle.SetActive(true);
-        float distance = World.Limits.z * 2f;
-        castle.transform.position = new Vector3(0, transform.position.y, GameManager.PlayerPos.z + distance);
+        int ind = nextGroundIndex(nextGroundIndex(currentGroundPart));
+        castle.transform.position = new Vector3(0, transform.position.y, groundParts[ind].transform.position.z);
+    }
+    private void SpawnTrigger()
+    {
+        bossSpawned = false;
+        GameObject castle = Instantiate(finalizeTrigger);
+        castle.SetActive(true);
+        int ind = nextGroundIndex(nextGroundIndex(currentGroundPart));
+        castle.transform.position = new Vector3(0, transform.position.y, groundParts[ind].transform.position.z);
     }
 }

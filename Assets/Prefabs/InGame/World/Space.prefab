@@ -6137,6 +6137,7 @@ MonoBehaviour:
   multipliersPool: {fileID: 11400000, guid: 120a495639e8ecf46adf620cd61dbe68, type: 2}
   carriageBoss: {fileID: 7043576775545194600, guid: a8e64067ec6b2054cb4e935b0aa89e0d, type: 3}
   castleObject: {fileID: 6896613971660719983, guid: 21cd7f49c598a0e44969c02418051d76, type: 3}
+  finalizeTrigger: {fileID: 6758002878516558259, guid: fb0a55671eeafa949aab6669cfd0d9c9, type: 3}
   multiplierPlane: {fileID: 225428671961418613, guid: 07a4351996f538c4fb2f836f739243f4, type: 3}
   maxGemsPerBlock: 7
 --- !u!1 &1250448874770143698

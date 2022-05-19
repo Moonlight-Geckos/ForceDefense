@@ -28,6 +28,10 @@ public class WorldTriggers : MonoBehaviour
     {
         GameManager.SpawnBossEvent.Invoke();
     }
+    public void SpawnCastle()
+    {
+        GameManager.SpawnCastleEvent.Invoke();
+    }
     public void WinGame()
     {
         GameManager.FinishGameEvent.Invoke(true);
