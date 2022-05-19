@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     private static bool bossSpawned;
     private static float toMultiplierProgress;
     private static float toFinishProgress = 0;
-    private float toMultiplierDistance = 0;
+    private float toMultiplierDistance = 1;
     #endregion
 
     static public Vector3 PlayerPos
@@ -124,6 +124,7 @@ public class GameManager : MonoBehaviour
         clearPoolsEvent.Invoke();
         playerPos = GameObject.FindGameObjectWithTag("Character").transform;
         bossTrigerPos = GameObject.FindGameObjectWithTag("BossTrigger").transform;
+        toMultiplierDistance = Vector3.Distance(playerPos.position, bossTrigerPos.position);
         toFinishProgress = 0;
         toMultiplierProgress = 0;
         SpawnCastleEvent.AddListener(KilledBoss);
