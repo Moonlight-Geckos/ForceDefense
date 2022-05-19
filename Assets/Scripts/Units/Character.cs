@@ -61,14 +61,15 @@ public class Character : MonoBehaviour, IHittable
     public void GetHit(Projectile projectile)
     {
         if (health <= 0)
-        {
-            Destroy();
             return;
-        }
         health -= projectile.Damage;
         projectile.Explode();
         healthBar?.UpdateValue(health/maxHealth);
         hitEffect?.HitActivate(hitAnimationLength, hitDuration, null);
+        if (health <= 0)
+        {
+            Destroy();
+        }
     }
     public void Destroy()
     {
