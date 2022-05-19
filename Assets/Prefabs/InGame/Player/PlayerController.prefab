@@ -119,7 +119,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 6528
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -474,7 +474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8920674134181505889}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Shields
   m_TagString: Character
   m_Icon: {fileID: 0}
@@ -923,7 +923,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5813780877431382893, guid: 763e2a5ac94e8544e90b47cbbed49659, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 763e2a5ac94e8544e90b47cbbed49659, type: 3}
@@ -1005,7 +1005,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5813780877431382893, guid: 763e2a5ac94e8544e90b47cbbed49659, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 763e2a5ac94e8544e90b47cbbed49659, type: 3}
@@ -1087,7 +1087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5813780877431382893, guid: 763e2a5ac94e8544e90b47cbbed49659, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 763e2a5ac94e8544e90b47cbbed49659, type: 3}
