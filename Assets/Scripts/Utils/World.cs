@@ -35,7 +35,6 @@ public class World : MonoBehaviour
     private int currentGroundPart = 0;
     private Timer bossTimer;
     private bool bossSpawned = false;
-    private Queue<GameObject> muliplierPlanesQueue = new Queue<GameObject>();
     private void Awake()
     {
         for (int i = 0; i < 3; i++)
@@ -57,11 +56,6 @@ public class World : MonoBehaviour
             groundParts[currentGroundPart].position = newPos;
             if (bossSpawned)
             {
-                if (muliplierPlanesQueue.Count > 6)
-                {
-                    muliplierPlanesQueue.Dequeue().GetComponent<IDisposable>().Dispose();
-                    muliplierPlanesQueue.Dequeue().GetComponent<IDisposable>().Dispose();
-                }
                 SpawnMultipliers();
             }
             else
@@ -105,16 +99,17 @@ public class World : MonoBehaviour
         int curCust = Mathf.FloorToInt(customizations.Length * (float)GameManager.CurrentMultiplier / GameManager.Instance.MaxMultiplier);
         if (curCust == customizations.Length)
             curCust--;
-            GameObject[] multipliers = new GameObject[2];
-        for (float i = 0, j = -multiplierPlane.transform.localScale.z; i < 2; i++, j += multiplierPlane.transform.localScale.z * 2)
+
+        MultiplierPlane mp=groundParts[currentGroundPart].GetComponentInChildren<MultiplierPlane>();
+        if (mp != null)
         {
-            multipliers[(int)i] = multipliersPool.Pool.Get();
-            multipliers[(int)i].transform.position = new Vector3(0, multipliers[(int)i].transform.position.y,
-                groundParts[currentGroundPart].position.z + 5 * j
-            );
-            multipliers[(int)i].GetComponent<MultiplierPlane>().GetComponent<MultiplierPlane>().ChangeCustomization(customizations[curCust], alphaValue);
-            muliplierPlanesQueue.Enqueue(multipliers[(int)i]);
+            Destroy(mp.gameObject);
         }
+        GameObject multiplier = multipliersPool.Pool.Get();;
+        multiplier.transform.parent = groundParts[currentGroundPart].transform;
+        multiplier.transform.localPosition = Vector3.zero;
+        multiplier.transform.localScale = Vector3.one;
+        multiplier.GetComponent<MultiplierPlane>().ChangeCustomization(customizations[curCust], alphaValue);
     }
     private void SpawnBoss()
     {

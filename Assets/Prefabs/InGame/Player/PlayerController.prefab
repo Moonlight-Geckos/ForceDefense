@@ -839,7 +839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca422e69f4f0f94091fb17bf6003d44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 23
+  health: 100
   hitAnimationLength: 0.3
   hitDuration: 0.5
   characterExplosionPool: {fileID: 11400000, guid: ce75c72a61c54b74893d4934fd8d1f5a, type: 2}
