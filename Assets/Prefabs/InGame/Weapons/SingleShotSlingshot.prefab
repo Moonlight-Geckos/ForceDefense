@@ -819,8 +819,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePool: {fileID: 11400000, guid: f88afb4fd29b0784e81f69b8c82424cb, type: 2}
-  projectileSpeed: 15
-  Cooldown: 1.5
-  radiusOfAttack: 30
-  zDifference: 8
+  projectileSpeed: 23
+  Cooldown: 1
+  radiusOfAttack: 45
+  zDifference: 20
   autoShoot: 1

@@ -101,7 +101,7 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineScale: 1.14
+    - _OutlineScale: 3.19
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -117,7 +117,7 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _BaseColor: {r: 0.8490566, g: 0.3568807, b: 0.03604484, a: 1}
+    - _BaseColor: {r: 0.509434, g: 0.2168468, b: 0.026432898, a: 1}
     - _Color: {r: 0.8078432, g: 0, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 5.2164755, g: 3.1134982, b: 0, a: 0}
