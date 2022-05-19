@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PurpleGoldenOutline
+  m_Name: PurpleGoldenOutline 1
   m_Shader: {fileID: -6465566751694194690, guid: 168503022e5fdec4fa800778f86ed268, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -101,7 +101,7 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineScale: 1.14
+    - _OutlineScale: 7.29
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -117,10 +117,10 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _BaseColor: {r: 0.8490566, g: 0.3568807, b: 0.03604484, a: 1}
+    - _BaseColor: {r: 0.8509804, g: 0.100392126, b: 0.035294104, a: 1}
     - _Color: {r: 0.8078432, g: 0, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutlineColor: {r: 5.2164755, g: 3.1134982, b: 0, a: 0}
+    - _OutlineColor: {r: 3.153692, g: 1.9002995, b: 0.044627637, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2240041709184129565

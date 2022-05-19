@@ -1042,19 +1042,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafecdc0a457a6d4a86c3dc0be565b03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alphaValue: 0.879
   customizations:
-  - planeColor: {r: 1, g: 0.58023894, b: 0.22075468, a: 0.29803923}
-    textColor: {r: 0.8773585, g: 0.38216385, b: 0, a: 0}
-    outlineColor: {r: 1, g: 0, b: 0, a: 0}
-  - planeColor: {r: 1, g: 0, b: 0, a: 0.29803923}
-    textColor: {r: 0, g: 0, b: 0, a: 0}
-    outlineColor: {r: 0, g: 0, b: 0, a: 0}
+  - planeColor: {r: 0.93333334, g: 0.34435502, b: 0.06666663, a: 0.29803923}
+    textColor: {r: 0.9716981, g: 0.9716981, b: 0.9716981, a: 0}
+    outlineColor: {r: 0.058823533, g: 0.63529414, b: 0.654902, a: 1}
+  - planeColor: {r: 0.8784314, g: 0.46719813, b: 0.03529414, a: 0.29803923}
+    textColor: {r: 0.9716981, g: 0.9716981, b: 0.9716981, a: 0}
+    outlineColor: {r: 0.058823533, g: 0.63529414, b: 0.654902, a: 1}
+  - planeColor: {r: 1, g: 0.7779867, b: 0, a: 0.29803923}
+    textColor: {r: 1, g: 1, b: 1, a: 0}
+    outlineColor: {r: 0.2784314, g: 0.627451, b: 0.6666667, a: 1}
+  - planeColor: {r: 0.68412244, g: 1, b: 0, a: 0.29803923}
+    textColor: {r: 1, g: 1, b: 1, a: 0}
+    outlineColor: {r: 0.2784314, g: 0.627451, b: 0.6666667, a: 1}
+  - planeColor: {r: 0.44905698, g: 1, b: 0, a: 0.29803923}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    outlineColor: {r: 0.0627451, g: 0.6745098, b: 0.69411767, a: 1}
+  - planeColor: {r: 0, g: 1, b: 0.15395617, a: 0.29803923}
+    textColor: {r: 1, g: 1, b: 1, a: 0}
+    outlineColor: {r: 0.2891153, g: 0.6496817, b: 0.6886792, a: 0}
   gemPool: {fileID: 11400000, guid: 54b52a8996c904d44b665f493d78094c, type: 2}
   multipliersPool: {fileID: 11400000, guid: 120a495639e8ecf46adf620cd61dbe68, type: 2}
   carriageBoss: {fileID: 7043576775545194600, guid: a8e64067ec6b2054cb4e935b0aa89e0d, type: 3}
   castleObject: {fileID: 6896613971660719983, guid: 21cd7f49c598a0e44969c02418051d76, type: 3}
   multiplierPlane: {fileID: 225428671961418613, guid: 07a4351996f538c4fb2f836f739243f4, type: 3}
-  bossDuration: 20
   maxGemsPerBlock: 7
 --- !u!1 &1250448874770143698
 GameObject:
