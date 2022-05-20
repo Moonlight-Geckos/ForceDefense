@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
         int ind = PlayerPrefs.GetInt("Skin");
         GameObject skin;
         if (ind < skins.Length)
-            skin = Instantiate(skins[2]);
+            skin = Instantiate(skins[ind]);
         else
             skin = Instantiate(skins[0]);
         skin.transform.parent = playerPos.GetComponentInChildren<Character>().transform;
@@ -152,10 +152,14 @@ public class GameManager : MonoBehaviour
         });
         finishGameEvent.AddListener((bool win) =>
         {
-            collectedGems *= CurrentMultiplier;
+            if(win)
+                collectedGems *= CurrentMultiplier;
+            else
+                collectedGems *= maxMultipliers[Mathf.Max(CurrentMultiplierInd-2, 0)];
             int prevGems = PlayerPrefs.GetInt("Gems");
             PlayerPrefs.SetInt("Gems", prevGems + collectedGems);
         });
+        HeadUI.Instance.UpdateGems();
     }
 
     void Update()
@@ -169,8 +173,8 @@ public class GameManager : MonoBehaviour
     }
     public void AddGem()
     {
-        HeadUI.Instance.UpdateGems();
         collectedGems++;
+        HeadUI.Instance.UpdateGems();
     }
     public void IncrementMultiplier()
     {

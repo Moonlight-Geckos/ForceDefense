@@ -15,6 +15,12 @@ public class HeadUI : MonoBehaviour
     private Transform ShopPanel;
 
     [SerializeField]
+    private Transform nextShopButton;
+
+    [SerializeField]
+    private Transform retryShopButton;
+
+    [SerializeField]
     private CanvasGroup inGamePanel;
 
     [SerializeField]
@@ -22,6 +28,9 @@ public class HeadUI : MonoBehaviour
 
     [SerializeField]
     private Transform loseText;
+
+    [SerializeField]
+    private CanvasGroup permanentUpgradePanel;
 
     [SerializeField]
     private ProgressBar toMultiplierPB;
@@ -40,6 +49,14 @@ public class HeadUI : MonoBehaviour
     private float gemsCounterAnimationLength = 4;
 
     private static HeadUI _instance;
+
+    public bool choseUpgrade = true;
+
+    public bool ChoseUpgrade
+    {
+        get { return choseUpgrade; }
+        set { choseUpgrade = value; }
+    }
 
     public static HeadUI Instance
     {
@@ -62,6 +79,8 @@ public class HeadUI : MonoBehaviour
         endGamePanel.alpha = 0;
         inGamePanel.alpha = 1;
         GameManager.FinishGameEvent.AddListener(finishGame);
+        choseUpgrade = true;
+        permanentUpgradePanel.alpha = 0;
     }
 
     public void Restart()
@@ -75,30 +94,53 @@ public class HeadUI : MonoBehaviour
     }
     public void NextLevel()
     {
-        IEnumerator restart()
+        IEnumerator next()
         {
             yield return new WaitForEndOfFrame();
-            int ind = SceneManager.GetActiveScene().buildIndex + 1;
-            if (ind < SceneManager.sceneCount)
-            {
-                SceneManager.LoadScene(ind + 1);
-            }
+            int ind = SceneManager.GetActiveScene().buildIndex;
+            if(ind < SceneManager.sceneCountInBuildSettings)
+            SceneManager.LoadScene(ind + 1);
         }
-        StartCoroutine(restart());
+        StartCoroutine(next());
     }
 
     private void finishGame(bool win)
     {
-        if (win)
-            winText.gameObject.SetActive(true);
-        else
-            loseText.gameObject.SetActive(true);
+        
         ControlPanel.gameObject.SetActive(false);
-        IEnumerator activate()
+
+        IEnumerator FinishGame()
         {
-            yield return new WaitForSeconds(2);
+            if (win)
+            {
+                permanentUpgradePanel.alpha = 0;
+                nextShopButton.gameObject.SetActive(true);
+                retryShopButton.gameObject.SetActive(false);
+                winText.gameObject.SetActive(true);
+                choseUpgrade = false;
+                for (int i = 0; i < permanentUpgradePanel.transform.GetChild(1).childCount; i++)
+                    permanentUpgradePanel.transform.GetChild(1).GetChild(i).gameObject.SetActive(true);
+                permanentUpgradePanel.transform.GetChild(1).GetChild(Random.Range(1, 3)).gameObject.SetActive(false);
+                while (permanentUpgradePanel.alpha < 1)
+                {
+                    permanentUpgradePanel.alpha += Time.deltaTime;
+                    yield return new WaitForEndOfFrame();
+                }
+            }
+            else
+            {
+                nextShopButton.gameObject.SetActive(false);
+                retryShopButton.gameObject.SetActive(true);
+                loseText.gameObject.SetActive(true);
+            }
+            while (!choseUpgrade)
+            {
+                yield return null;
+            }
+            endGamePanel.gameObject.SetActive(true);
             while (endGamePanel.alpha < 1)
             {
+                permanentUpgradePanel.alpha -= Time.deltaTime;
                 endGamePanel.alpha += Time.deltaTime;
                 inGamePanel.alpha -= Time.deltaTime;
                 yield return new WaitForEndOfFrame();
@@ -113,7 +155,7 @@ public class HeadUI : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
         }
-        StartCoroutine(activate());
+        StartCoroutine(FinishGame());
     }
 
     public void UpdateProgress()

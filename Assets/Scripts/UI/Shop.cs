@@ -16,7 +16,7 @@ public class Shop : MonoBehaviour
     private Transform[] skins;
     int ind = 0;
     int gemsCount;
-    private void Awake()
+    private void OnEnable()
     {
         skins = new Transform[skinsParent.childCount];
         for(int i = 0; i < skinsParent.childCount; i++)
@@ -27,7 +27,7 @@ public class Shop : MonoBehaviour
         for (int i = 0; i < skins.Length; i++)
         {
             skins[i].GetComponent<Outline>().enabled = false;
-            if(i == 0 || PlayerPrefs.GetString("BoughtSkins").Contains(i.ToString()))
+            if((i == 0 || PlayerPrefs.GetString("BoughtSkins").Contains(i.ToString())) && skins[i].childCount > 2)
             {
                 GameObject f = skins[i].GetChild(0).gameObject;
                 GameObject s = skins[i].GetChild(1).gameObject;
@@ -57,6 +57,7 @@ public class Shop : MonoBehaviour
                 Destroy(f);
                 Destroy(ss);
             }
+            PlayerPrefs.SetInt("Skin", ind);
         }
     }
     public void Select(int ind)
@@ -74,5 +75,7 @@ public class Shop : MonoBehaviour
         int gems = PlayerPrefs.GetInt("Gems");
         if (GUI.Button(new Rect(10, 10, 150, 100), "Cheat"))
             PlayerPrefs.SetInt("Gems", gems + 1000);
+        gemsCount = PlayerPrefs.GetInt("Gems");
+        gemsCountText.text = gemsCount.ToString();
     }
 }
