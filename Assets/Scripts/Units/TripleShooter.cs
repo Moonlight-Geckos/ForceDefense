@@ -23,6 +23,9 @@ public class TripleShooter : MonoBehaviour, IShooter, IEnemy
     [Range(0.05f, 30f)]
     private float zDifference = 8f;
 
+    [SerializeField]
+    private bool autoShoot = true;
+
     #endregion
 
     private Transform startCenterProjectilePos;
@@ -42,7 +45,10 @@ public class TripleShooter : MonoBehaviour, IShooter, IEnemy
         endLeftProjectilePos = transform.Find("ProjectileEnd-Left");
         startRightProjectilePos = transform.Find("ProjectileStart-Right");
         endRightProjectilePos = transform.Find("ProjectileEnd-Right");
+        GameManager.FinishGameEvent.AddListener(OnFinish);
 
+        if (!autoShoot)
+            return;
         cooldownTimer = TimersPool.Pool.Get();
         cooldownTimer.Duration = Cooldown;
         cooldownTimer.AddTimerFinishedEventListener(AutoShoot);
@@ -50,6 +56,8 @@ public class TripleShooter : MonoBehaviour, IShooter, IEnemy
     }
     private void Update()
     {
+        if (!autoShoot)
+            return;
         Quaternion newRotation = Quaternion.LookRotation(GameManager.PlayerPos + new Vector3(0, 0, 6) - transform.position, Vector3.up);
         transform.rotation = new Quaternion(transform.rotation.x, newRotation.y, transform.rotation.z, newRotation.w);
     }
@@ -95,6 +103,8 @@ public class TripleShooter : MonoBehaviour, IShooter, IEnemy
 
     private void AutoShoot()
     {
+        if (!autoShoot)
+            return;
         Vector3 Direction = (Vector3)GameManager.PlayerPos;
         if (Vector3.Distance(Direction, transform.position) > radiusOfAttack
             || Mathf.Abs(transform.position.z - Direction.z) < zDifference
@@ -112,5 +122,10 @@ public class TripleShooter : MonoBehaviour, IShooter, IEnemy
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, radiusOfAttack);
+    }
+
+    public void OnFinish(bool win)
+    {
+        autoShoot = false;
     }
 }

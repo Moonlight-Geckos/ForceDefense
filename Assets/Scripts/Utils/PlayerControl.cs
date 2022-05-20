@@ -48,7 +48,6 @@ public class PlayerControl : MonoBehaviour
     {
         joystick = FindObjectOfType<Joystick>();
         mainRigidbody = GetComponent<Rigidbody>();
-        characterAnimator = characterTransform.GetComponent<Animator>();
         cameraAnimator = camerasTransform.GetComponent<Animator>();
         GameManager.FinishGameEvent.AddListener(finishGame);
         GameManager.SpawnBossEvent.AddListener(BossMode);
@@ -56,6 +55,7 @@ public class PlayerControl : MonoBehaviour
     private void Start()
     {
         mainRigidbody.velocity = new Vector3(0, 0, passiveVerticalSpeed);
+        characterAnimator = characterTransform.GetComponentInChildren<Animator>();
     }
 
     private void Update()

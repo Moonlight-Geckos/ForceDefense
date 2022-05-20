@@ -12,10 +12,6 @@ public class Character : MonoBehaviour, IHittable
     [SerializeField]
     private float maxHealth = 20f;
 
-    [Range(0.10f, 1f)]
-    [SerializeField]
-    private float hitAnimationLength = 0.2f;
-
     [Range(0.0f, 6f)]
     [SerializeField]
     private float hitDuration = 2f;
@@ -62,10 +58,12 @@ public class Character : MonoBehaviour, IHittable
     {
         if (health <= 0)
             return;
+        if (hitEffect == null)
+            hitEffect = GetComponentInChildren<HitglowEffect>();
         health -= projectile.Damage;
         projectile.Explode();
         healthBar?.UpdateValue(health/maxHealth);
-        hitEffect?.HitActivate(hitAnimationLength, hitDuration, null);
+        hitEffect?.HitActivate(hitDuration, null);
         if (health <= 0)
         {
             Destroy();

@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int[] maxMultipliers;
 
+    [SerializeField]
+    private GameObject[] skins;
+
 
     #endregion
 
@@ -121,17 +124,38 @@ public class GameManager : MonoBehaviour
         {
             _instance = this;
         }
+        if (!PlayerPrefs.HasKey("Skin"))
+        {
+            PlayerPrefs.SetInt("Skin", 0);
+        }
         clearPoolsEvent.Invoke();
-        playerPos = GameObject.FindGameObjectWithTag("Character").transform;
+        playerPos = GameObject.FindGameObjectWithTag("Player").transform;
+        int ind = PlayerPrefs.GetInt("Skin");
+        GameObject skin;
+        if (ind < skins.Length)
+            skin = Instantiate(skins[2]);
+        else
+            skin = Instantiate(skins[0]);
+        skin.transform.parent = playerPos.GetComponentInChildren<Character>().transform;
+        skin.transform.localPosition = Vector3.zero;
         bossTrigerPos = GameObject.FindGameObjectWithTag("BossTrigger").transform;
         toMultiplierDistance = Vector3.Distance(playerPos.position, bossTrigerPos.position);
         toFinishProgress = 0;
         toMultiplierProgress = 0;
-        SpawnCastleEvent.AddListener(KilledBoss);
         currentMultiplierInd = 0;
         collectedGems = 0;
         started = false;
         bossSpawned = false;
+        SpawnCastleEvent.AddListener(() =>
+        {
+            toFinishProgress = 1;
+        });
+        finishGameEvent.AddListener((bool win) =>
+        {
+            collectedGems *= CurrentMultiplier;
+            int prevGems = PlayerPrefs.GetInt("Gems");
+            PlayerPrefs.SetInt("Gems", prevGems + collectedGems);
+        });
     }
 
     void Update()
@@ -146,7 +170,7 @@ public class GameManager : MonoBehaviour
     public void AddGem()
     {
         HeadUI.Instance.UpdateGems();
-        collectedGems += CurrentMultiplier;
+        collectedGems++;
     }
     public void IncrementMultiplier()
     {
@@ -157,9 +181,5 @@ public class GameManager : MonoBehaviour
             FinalizeGame.Invoke();
         }
         toFinishProgress = Mathf.Pow((float)(currentMultiplierInd) / maxMultipliers.Length, 2);
-    }
-    void KilledBoss()
-    {
-        toFinishProgress = 1;
     }
 }

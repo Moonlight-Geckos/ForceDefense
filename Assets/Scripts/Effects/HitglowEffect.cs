@@ -1,98 +1,79 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+struct ColorPair
+{
+    public Color color;
+    public string reference;
+}
 public class HitglowEffect : MonoBehaviour
 {
     [SerializeField]
     Renderer[] m_Renderer;
 
     [SerializeField]
-    Material referenceMaterial;
-
-    [Range(0.0f, 1f)]
-    [SerializeField]
-    private float maxAlpha = 0.5f;
-
-    [Range(0.0f, 4f)]
-    [SerializeField]
-    private float glowScale = 0.25f;
-
-    [SerializeField]
     private Color defaultGlowColor = Color.red;
 
     private List<Material> effectedMats = new List<Material>();
+    private List<ColorPair> originalColors = new List<ColorPair>();
     private Timer timer;
 
     private void Awake()
     {
         foreach (var renderer in m_Renderer)
         {
-            Material mat = new Material(referenceMaterial);
-            List<Material> mats = new List<Material>(renderer.materials);
-            mats.Add(mat);
-            renderer.materials = mats.ToArray();
-            effectedMats.Add(mat);
-        }
-        foreach (Material material in effectedMats)
-        {
-            material.SetFloat("_Alpha", 0);
-
-            material.SetFloat("_Scale", glowScale);
-
-            material.SetColor("_Color", defaultGlowColor);
+            List<Material> materials = new List<Material>(renderer.materials);
+            effectedMats.AddRange(materials);
+            foreach (var material in materials)
+            {
+                Color color;
+                string reference;
+                if (material.HasProperty("_Color"))
+                {
+                    reference = "_Color";
+                    color = material.GetColor("_Color");
+                }
+                else
+                {
+                    color = material.GetColor("_BaseColor");
+                    reference = "_BaseColor";
+                }
+                ColorPair pair;
+                pair.color = color;
+                pair.reference = reference;
+                originalColors.Add(pair);
+            }
         }
     }
-
     public void Reset()
     {
         StopAllCoroutines();
         timer?.Stop();
-        foreach (Material material in effectedMats)
+        for(int i = 0; i < effectedMats.Count; i++)
         {
-            material.SetFloat("_Alpha", 0);
+            effectedMats[i].SetColor(originalColors[i].reference, originalColors[i].color);
         }
     }
 
-    public void HitActivate(float animationLength, float duration, Color? color)
+    public void HitActivate(float duration, Color? color)
     {
+        if (color == null)
+            color = defaultGlowColor;
 
         void ChangeColor()
         {
-            foreach (Material material in effectedMats)
+            for(int i=0; i<effectedMats.Count; i++)
             {
-                IEnumerator changeColor()
-                {
-                    float alpha = material.GetFloat("_Alpha");
-                    while (alpha < maxAlpha)
-                    {
-                        alpha += Time.deltaTime / animationLength;
-                        yield return new WaitForEndOfFrame();
-                        material.SetFloat("_Alpha", alpha);
-                    }
-                }
-                if (color != null)
-                    material.SetColor("_Color", (Color)color);
-                else
-                    material.SetColor("_Color", defaultGlowColor);
-                StartCoroutine(changeColor());
+                effectedMats[i].SetColor(originalColors[i].reference, (Color)color);
             }
         }
         void ResetColors()
         {
-            foreach (Material material in effectedMats)
+            for (int i = 0; i < effectedMats.Count; i++)
             {
-                IEnumerator changeColor()
-                {
-                    float alpha = material.GetFloat("_Alpha");
-                    while (alpha > 0)
-                    {
-                        alpha -= Time.deltaTime / animationLength;
-                        yield return new WaitForEndOfFrame();
-                        material.SetFloat("_Alpha", alpha);
-                    }
-                }
-                StartCoroutine(changeColor());
+                effectedMats[i].SetColor(originalColors[i].reference, originalColors[i].color);
             }
         }
 

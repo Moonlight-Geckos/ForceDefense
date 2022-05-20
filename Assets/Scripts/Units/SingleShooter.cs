@@ -39,6 +39,7 @@ public class SingleShooter : MonoBehaviour, IShooter, IEnemy
     private void Start()
     {
         startProjectileTransform = transform.Find("ProjectileStart");
+        GameManager.FinishGameEvent.AddListener(OnFinish);
         if (!autoShoot)
             return;
         cooldownTimer = TimersPool.Pool.Get();
@@ -77,6 +78,8 @@ public class SingleShooter : MonoBehaviour, IShooter, IEnemy
 
     private void AutoShoot()
     {
+        if (!autoShoot)
+            return;
         Vector3 Direction = GameManager.PlayerPos;
         if (autoShoot && Vector3.Distance(Direction, transform.position) > radiusOfAttack
             || Mathf.Abs(transform.position.z - Direction.z) < zDifference
@@ -98,5 +101,10 @@ public class SingleShooter : MonoBehaviour, IShooter, IEnemy
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, radiusOfAttack);
+    }
+
+    public void OnFinish(bool win)
+    {
+        autoShoot = false;
     }
 }

@@ -25,6 +25,7 @@ public interface IEnemy
         get;
     }
     void OnDestroy();
+    void OnFinish(bool win);
 }
 public interface IPickable
 {

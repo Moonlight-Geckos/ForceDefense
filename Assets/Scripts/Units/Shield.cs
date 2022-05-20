@@ -21,10 +21,6 @@ public class Shield : MonoBehaviour, IHittable
 
     [Header("Hittable")]
 
-    [Range(0.10f, 0.90f)]
-    [SerializeField]
-    private float hitAnimationLength = 0.30f;
-
     [Range(0.0f, 6f)]
     [SerializeField]
     private float hitDuration = 2f;
@@ -35,10 +31,6 @@ public class Shield : MonoBehaviour, IHittable
     [Space(20)]
 
     [Header("Reflection")]
-
-    [Range(0.10f, 0.90f)]
-    [SerializeField]
-    private float reflectAnimationLength = 0.30f;
 
     [Range(0.0f, 6f)]
     [SerializeField]
@@ -119,7 +111,7 @@ public class Shield : MonoBehaviour, IHittable
                 return;
             }
             transform.localScale -= transform.localScale * shrinkBy;
-            shieldGlowEffect?.HitActivate(hitAnimationLength, hitDuration, hitColor);
+            shieldGlowEffect?.HitActivate(hitDuration, hitColor);
         }
     }
 
@@ -155,7 +147,7 @@ public class Shield : MonoBehaviour, IHittable
     {
         void activate() {
             isReflecting = true;
-            shieldGlowEffect?.HitActivate(reflectAnimationLength, reflectionDuration, reflectionColor);
+            shieldGlowEffect?.HitActivate(reflectionDuration, reflectionColor);
             shieldReflectionTimer.Run();
         }
 
@@ -170,7 +162,7 @@ public class Shield : MonoBehaviour, IHittable
         if (shieldReflectionTimer.Running)
         {
             shieldReflectionTimer.Refresh();
-            shieldGlowEffect?.HitActivate(reflectAnimationLength, reflectionDuration, reflectionColor);
+            shieldGlowEffect?.HitActivate(reflectionDuration, reflectionColor);
         }
         else
             activate();

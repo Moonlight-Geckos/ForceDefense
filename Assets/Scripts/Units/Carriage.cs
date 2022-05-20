@@ -83,4 +83,8 @@ public class Carriage : MonoBehaviour, IEnemy
     {
         //Nothing to do yet
     }
+    void IEnemy.OnFinish(bool win)
+    {
+        //Nothing to do yet
+    }
 }
