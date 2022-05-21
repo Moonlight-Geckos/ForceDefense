@@ -70,12 +70,4 @@ public class Shop : MonoBehaviour
         this.ind = ind;
         skins[ind].GetComponent<Outline>().enabled = true;
     }
-    private void OnGUI()
-    {
-        int gems = PlayerPrefs.GetInt("Gems");
-        if (GUI.Button(new Rect(10, 10, 150, 100), "Cheat"))
-            PlayerPrefs.SetInt("Gems", gems + 1000);
-        gemsCount = PlayerPrefs.GetInt("Gems");
-        gemsCountText.text = gemsCount.ToString();
-    }
 }

@@ -113,6 +113,7 @@ public class HeadUI : MonoBehaviour
         {
             if (win)
             {
+                permanentUpgradePanel.gameObject.SetActive(true);
                 permanentUpgradePanel.alpha = 0;
                 nextShopButton.gameObject.SetActive(true);
                 retryShopButton.gameObject.SetActive(false);
@@ -145,6 +146,8 @@ public class HeadUI : MonoBehaviour
                 inGamePanel.alpha -= Time.deltaTime;
                 yield return new WaitForEndOfFrame();
             }
+
+            permanentUpgradePanel.gameObject.SetActive(false);
             int allGems = GameManager.Instance.CollectedGems;
             float gemsCount = 0;
             while (gemsCount < allGems)
