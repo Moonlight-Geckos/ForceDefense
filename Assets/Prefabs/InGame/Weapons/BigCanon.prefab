@@ -417,12 +417,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d4910f6eb8cffe4dad6c29b2764b819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePool: {fileID: 11400000, guid: d626802bf3cef5f4385d4be09d2bfe51, type: 2}
-  projectileSpeed: 18
+  projectilePool: {fileID: 11400000, guid: 4a2ee7b9bc6923f41a57aeb697961033, type: 2}
+  projectileSpeed: 26
   Cooldown: 1.5
   radiusOfAttack: 50
-  zDifference: 8
-  autoShoot: 0
+  zDifference: 15
+  autoShoot: 1
 --- !u!4 &4362681768273100337 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c27ddd2bf43f86045a00e9f90dc9319d, type: 3}
