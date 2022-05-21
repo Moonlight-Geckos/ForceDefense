@@ -99,7 +99,7 @@ public class Shield : MonoBehaviour, IHittable
 
         if (IsReflecting)
         {
-            projectile.Reflect(transform.forward);
+            projectile.Reflect(transform.parent.forward);
         }
         else
         {

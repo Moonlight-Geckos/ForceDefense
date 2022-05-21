@@ -75,6 +75,7 @@ public class HitglowEffect : MonoBehaviour
             {
                 effectedMats[i].SetColor(originalColors[i].reference, originalColors[i].color);
             }
+            timer = null;
         }
 
         if (timer == null)
@@ -87,6 +88,7 @@ public class HitglowEffect : MonoBehaviour
         if (timer.Running)
         {
             StopAllCoroutines();
+            timer.Duration = duration;
             timer.Refresh();
         }
         ChangeColor();

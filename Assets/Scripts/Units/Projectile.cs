@@ -42,6 +42,7 @@ public class Projectile : MonoBehaviour
         Vector3 newVel = Vector3.Reflect(rb.velocity, direction)*2;
         rb.velocity = newVel;
         transform.rotation = Quaternion.LookRotation(rb.velocity, Vector3.up);
+        gameObject.layer = LayerMask.NameToLayer("Character");
         reflected = true;
     }
 
