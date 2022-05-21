@@ -352,14 +352,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7706819423337730770}
     m_Modifications:
-    - target: {fileID: 106951328728473168, guid: b0806f70d58ad36428cc03c3c6a77b0d, type: 3}
-      propertyPath: autoShoot
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 106951328728473168, guid: b0806f70d58ad36428cc03c3c6a77b0d, type: 3}
-      propertyPath: projectilePool
-      value: 
-      objectReference: {fileID: 11400000, guid: d626802bf3cef5f4385d4be09d2bfe51, type: 2}
     - target: {fileID: 4017364080696091787, guid: b0806f70d58ad36428cc03c3c6a77b0d, type: 3}
       propertyPath: m_Name
       value: BigCanon (1)
@@ -462,14 +454,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7706819423337730770}
     m_Modifications:
-    - target: {fileID: 106951328728473168, guid: b0806f70d58ad36428cc03c3c6a77b0d, type: 3}
-      propertyPath: autoShoot
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 106951328728473168, guid: b0806f70d58ad36428cc03c3c6a77b0d, type: 3}
-      propertyPath: projectilePool
-      value: 
-      objectReference: {fileID: 11400000, guid: d626802bf3cef5f4385d4be09d2bfe51, type: 2}
     - target: {fileID: 4017364080696091787, guid: b0806f70d58ad36428cc03c3c6a77b0d, type: 3}
       propertyPath: m_Name
       value: BigCanon

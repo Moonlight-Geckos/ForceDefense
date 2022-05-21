@@ -101,12 +101,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   shrinkBy: 0.2
-  hitAnimationLength: 0.2
   hitDuration: 0.5
   hitColor: {r: 1, g: 0, b: 0, a: 0}
-  reflectAnimationLength: 0.3
-  reflectionDuration: 2
-  reflectionColor: {r: 0.81999874, g: 0, b: 1, a: 0}
+  reflectionDuration: 6
+  reflectionColor: {r: 0.22315402, g: 0.83137256, b: 0.103729084, a: 0}
   shieldExplosionParticlePool: {fileID: 11400000, guid: 0a161f2bf1a98b84ba6cd8ab0f780d8e, type: 2}
   shieldGlowEffect: {fileID: 3803066127090264806}
 --- !u!64 &4799131568805796988
@@ -137,7 +135,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Renderer:
   - {fileID: 5813780877431382882}
-  referenceMaterial: {fileID: 2100000, guid: 96577862571e44a43b017597609a68b4, type: 2}
-  maxAlpha: 1
-  glowScale: 0.5
   defaultGlowColor: {r: 1, g: 0, b: 0, a: 1}
