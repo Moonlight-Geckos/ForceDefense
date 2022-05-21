@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e0e4043f2069d347ba89deac8186bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredZPosition: 32
+  desiredZPosition: 35
   animationSpeed: 0.5
   shootCooldown: 1.25
   explosionParticlePool: {fileID: 11400000, guid: 174295d786cbd324baeacd09d0a540dd, type: 2}
