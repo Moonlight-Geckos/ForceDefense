@@ -14,7 +14,7 @@ public class ShieldReplenish : MonoBehaviour,IPickable
     public void Pickup(Transform effected)
     {
         Character character = effected.transform.root.GetComponentInChildren<Character>();
-        character.ReplenishShield();
+        character?.ReplenishShield();
         Destroy(gameObject);
     }
 }

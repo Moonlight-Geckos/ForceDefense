@@ -9,14 +9,14 @@ public class Timer
 	float totalSeconds = 0;
 
 	// timer execution
-	float startTime = 0;
+	float elapsedSeconds = 0;
 	bool running = false;
 
 	bool available = false;
 
 	UnityEvent timerFinishedEvent = new UnityEvent();
 
-	static UnityEvent timerUpdateEvent = new UnityEvent();
+	static UnityEvent<float> timerUpdateEvent = new UnityEvent<float>();
 
 	#endregion
 
@@ -44,7 +44,6 @@ public class Timer
 		{
 			available = value;
 			timerFinishedEvent.RemoveAllListeners();
-			startTime = float.MaxValue;
 			totalSeconds = 0;
 			running = false;
 		}
@@ -59,13 +58,13 @@ public class Timer
 		timerUpdateEvent.AddListener(Update);
     }
 
-	public void Update()
+	public void Update(float t)
 	{
 		if (!Available)
 			return;
 		if (running)
 		{
-			float elapsedSeconds = Time.realtimeSinceStartup - startTime;
+			elapsedSeconds += t;
 			if (elapsedSeconds >= totalSeconds)
             {
 				running = false;
@@ -84,7 +83,7 @@ public class Timer
 		if (totalSeconds > 0)
 		{
 			running = true;
-			startTime = Time.realtimeSinceStartup;
+			elapsedSeconds = 0;
 		}
 	}
 
@@ -105,12 +104,12 @@ public class Timer
 
 	public void Refresh()
 	{
-		startTime = Time.realtimeSinceStartup;
+		elapsedSeconds = 0;
 	}
 
-	public static void UpdateTimers()
+	public static void UpdateTimers(float t)
     {
-		timerUpdateEvent.Invoke();
+		timerUpdateEvent.Invoke(t);
     }
 
 	#endregion

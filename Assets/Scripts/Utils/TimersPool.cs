@@ -46,9 +46,9 @@ public static class TimersPool
         timer.Stop();
     }
 
-    static public void UpdateTimers()
+    static public void UpdateTimers(float t)
     {
-        Timer.UpdateTimers();
+        Timer.UpdateTimers(t);
     }
 
     static void ClearPool()

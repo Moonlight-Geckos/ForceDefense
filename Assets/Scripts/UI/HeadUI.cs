@@ -30,6 +30,9 @@ public class HeadUI : MonoBehaviour
     private Transform loseText;
 
     [SerializeField]
+    private Transform pausePanel;
+
+    [SerializeField]
     private CanvasGroup permanentUpgradePanel;
 
     [SerializeField]
@@ -98,10 +101,29 @@ public class HeadUI : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
             int ind = SceneManager.GetActiveScene().buildIndex;
-            if(ind < SceneManager.sceneCountInBuildSettings)
-            SceneManager.LoadScene(ind + 1);
+            if(ind < SceneManager.sceneCountInBuildSettings - 1)
+                SceneManager.LoadScene(ind + 1);
+            else
+                SceneManager.LoadScene(0);
         }
         StartCoroutine(next());
+    }
+    public void PauseUnpause()
+    {
+        if (!GameManager.Started && GameManager.BossSpawned)
+            return;
+        if (Time.timeScale > 0)
+        {
+            pausePanel.gameObject.SetActive(true);
+            inGamePanel.gameObject.SetActive(false);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            pausePanel.gameObject.SetActive(false);
+            inGamePanel.gameObject.SetActive(true);
+            Time.timeScale = 1;
+        }
     }
 
     private void finishGame(bool win)

@@ -29,7 +29,7 @@ public class Projectile : MonoBehaviour
         if (hittable != null)
             hittable.GetHit(this);
         else
-            GetComponent<IDisposable>().Dispose();
+            Explode();
     }
 
     public void Reflect(Vector3 direction)

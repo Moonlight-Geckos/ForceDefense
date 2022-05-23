@@ -164,7 +164,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        TimersPool.UpdateTimers();
+        TimersPool.UpdateTimers(Time.deltaTime);
         HeadUI.Instance.UpdateProgress();
         if (bossTrigerPos != null && playerPos.position.z <= bossTrigerPos.position.z)
             toMultiplierProgress = 1 - (Vector3.Distance(playerPos.position, bossTrigerPos.position) / toMultiplierDistance);
