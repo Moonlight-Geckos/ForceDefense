@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 37474
+  controlID: 37886
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 37475
+  controlID: 37887
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 37476
+  controlID: 37888
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 066b0000
+      m_SelectedIDs: 
       m_LastClickedID: 0
       m_ExpandedIDs: 60e1f6ff6840f7ffc640f7ff624ff7ff3655f7ff4c5ef7ff6adff7ff94f1f7ffd2f1f7ff4e03f8ff1c0cf8ff6417f8ffa41ff8fffa28f8ff462ef8ffe640f8ff3a56f8ffda68f8ff2e7ef8ff6a91f8ffbea6f8fff6a6f8fffea6f8ff16a7f8ff1ca7f8ff5eb9f8ffb2cef8ff52e1f8ffcae7f8ff02e8f8ff0ce8f8ffb6e8f8ff28f7f8ffbaf8f8ff8c09f9ff8c0ef9ffd822f9ff2226f9ff6029f9ff1a2cf9ffd832f9ffd23cf9ff8a4df9ff5a74f9ffe8ccf9ff9af9f9fff000fafff800faff0e01faff2c01faff2610faff5664faff3671faff9671faffb871faffda71faffe071faffe471faffa67dfaff6e95faffa898faff54a3faff00b4faff98b5fafff0bcfaffe2c1faff9cc7faff78d2faffeee9faff42fffaffde00fbff5415fbffac24fbff8639fbff2e77fbffa87cfbffac7cfbff4a88fbff02b8fbff9ab9fbff8adbfbff7cfdfbffa000fcff0207fcff3a09fcff480bfcff6c17fcffd81cfcff361dfcffe02dfcff823cfcff244bfcff0a5bfcffa869fcffc479fcffee7cfcff167dfcff1a7dfcff6688fcffb888fcff1898fcff2aacfcffc2bbfcff64cafcfffcd9fcff9ee8fcffb8f8fcffd835fdfffa35fdff1c36fdff2236fdff2636fdffb437fdffc03afdff1c3bfdfff23bfdffe03efdff8441fdff0846fdff046afdff406afdffdc70fdffe673fdff0e75fdffbc87fdff4298fdffd49ffdff80b5fdff8af1fdff5e04feff6a23feff2436feff0c4ffeff5660feffd270feffc882feff609bfeff76aefefff2befeff38cffeff72e3feff4a45fffffe46ffff2648ffff444fffff7c4fffff9e4fffffc04fffffc64fffffca4fffffac50ffffb850ffffd850ffffe050ffff0c51ffffac51ffff4655ffff2e5bffffac5cffff0c64ffff3271ffffb073ffffde7affff1695ffff74a2ffff2ae4fffff2eeffff78efffffbaf0ffff08f8ffff34fbffffda690000e0820000b09d0000409e0000a8c30000eac3000044c60000a4c80000b2c8000006c90000c4cd000098d100005ce40000fee4000090f9000020fa0000da0f01006e100100725e0100085f01009c9602006c970200ae0903006c9d0300f20c0400540f0400c02c0400eae20400f05905004e630500e063050084730500a6bd050032be05000a5806009658060076aa060004ab0600025607005c01080010020800
       m_RenameOverlay:
@@ -270,8 +270,8 @@ MonoBehaviour:
     y: 0
     width: 496
     height: 653
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 8}
   m_Panes:
   - {fileID: 8}
@@ -566,9 +566,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.33092073, y: 0.084797665, z: -0.029815327, w: -0.93936783}
   m_Size:
-    m_Target: 36.525528
+    m_Target: 77.1922
     speed: 2
-    m_Value: 36.525528
+    m_Value: 77.1922
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -687,23 +687,23 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/InGame/Weapons
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/InGame/Weapons
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\WARlord\Desktop\Voodoo games\Force Defense\Force Defense
     GAME
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 131}
-    m_SelectedIDs: 78820000
-    m_LastClickedID: 33400
-    m_ExpandedIDs: 00000000208200002282000024820000268200002a82000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 2a820000
+    m_LastClickedID: 33322
+    m_ExpandedIDs: 000000002082000022820000248200002682000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -756,9 +756,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 066b0000
-    m_LastClickedInstanceID: 27398
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000ce7f000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

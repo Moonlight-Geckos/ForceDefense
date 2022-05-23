@@ -821,6 +821,6 @@ MonoBehaviour:
   projectilePool: {fileID: 11400000, guid: f88afb4fd29b0784e81f69b8c82424cb, type: 2}
   projectileSpeed: 23
   Cooldown: 1
-  radiusOfAttack: 45
-  zDifference: 20
+  radiusOfAttack: 50
+  zDifference: 10
   autoShoot: 1

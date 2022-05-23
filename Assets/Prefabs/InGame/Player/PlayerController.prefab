@@ -509,7 +509,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passiveVerticalSpeed: 5
   additiveVerticalSpeed: 6
-  horizontalSpeed: 8
+  horizontalSpeed: 12
   rotationSpeed: 7
   wallHorizontalBoostSpeed: 4
   speedupParticlePool: {fileID: 11400000, guid: edb3d3bd255c03a4dbd716a9b6496c12, type: 2}
