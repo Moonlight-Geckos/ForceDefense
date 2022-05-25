@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3747,8 +3747,40 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6744134787907511693, guid: 8e68d0cfc2dcf424d82cb8f38e56320d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6744134787907511693, guid: 8e68d0cfc2dcf424d82cb8f38e56320d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6744134787907511693, guid: 8e68d0cfc2dcf424d82cb8f38e56320d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6744134787907511693, guid: 8e68d0cfc2dcf424d82cb8f38e56320d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7068244321014401014, guid: 8e68d0cfc2dcf424d82cb8f38e56320d, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7171198073631565775, guid: 8e68d0cfc2dcf424d82cb8f38e56320d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7171198073631565775, guid: 8e68d0cfc2dcf424d82cb8f38e56320d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7171198073631565775, guid: 8e68d0cfc2dcf424d82cb8f38e56320d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7171198073631565775, guid: 8e68d0cfc2dcf424d82cb8f38e56320d, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7517568843372738212, guid: 8e68d0cfc2dcf424d82cb8f38e56320d, type: 3}
@@ -3798,6 +3830,10 @@ PrefabInstance:
     - target: {fileID: 7517568843372738213, guid: 8e68d0cfc2dcf424d82cb8f38e56320d, type: 3}
       propertyPath: m_Name
       value: Necessaries
+      objectReference: {fileID: 0}
+    - target: {fileID: 7517568843930910455, guid: 8e68d0cfc2dcf424d82cb8f38e56320d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7517568844719452755, guid: 8e68d0cfc2dcf424d82cb8f38e56320d, type: 3}
       propertyPath: maxMultiplier
